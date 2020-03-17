@@ -14,7 +14,7 @@ from veros.variables import Variable, allocate
 import veros.tools
 from veros.core.utilities import enforce_boundaries
 
-dirname = os.path.dirname(__file__)
+dirname = os.path.dirname(os.path.abspath(__file__))
 
 class GlobalFlexibleResolutionSetup(VerosSetup):
     """
@@ -26,15 +26,15 @@ class GlobalFlexibleResolutionSetup(VerosSetup):
     equatorial_grid_spacing_factor = 0.5
     polar_grid_spacing_factor = None
 
-    runlen_y = 360*100
+    runlen_y = 360*10
     writeper = 120
     @veros_method
     def set_parameter(self, vs):
-        vs.identifier = '100_year_0Ma'
+        vs.identifier = '10_year_0Ma'
 
         vs.nx = 128
         vs.ny = 64
-        vs.nz = 30
+        vs.nz = 20
         vs.dt_mom = 3600.
         vs.dt_tracer = 3600*5.
         vs.runlen = 86400 * self.runlen_y
@@ -121,7 +121,7 @@ class GlobalFlexibleResolutionSetup(VerosSetup):
                 comm=rs.mpi_comm,
             )
 
-        with h5netcdf.File(dirname + '../../map_manipulation/globalmeanforcing/idealized_forcing_1deg.nc', 'r', **kwargs) as forcing_file:
+        with h5netcdf.File(dirname + '/../../../map_manipulation/globalmeanforcing/idealized_forcing_1deg.nc', 'r', **kwargs) as forcing_file:
             var_obj = forcing_file.variables[var]
             return np.array(var_obj[idx].astype(str(var_obj.dtype))).T
 
