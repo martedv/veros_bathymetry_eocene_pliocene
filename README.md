@@ -1,5 +1,5 @@
 # scriptie_bachelor_veros
-Bachelor Thesis Marte Voorneveld. On the changes in the atlantic meridonal overturning currents.
+Bachelor Thesis Marte Voorneveld. On the changes in the atlantic meridonal overturning currents. Due to changes in bathymetry over time.
 
 
 # Large Files
