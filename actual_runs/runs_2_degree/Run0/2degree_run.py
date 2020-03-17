@@ -26,15 +26,15 @@ class GlobalFlexibleResolutionSetup(VerosSetup):
     equatorial_grid_spacing_factor = 0.5
     polar_grid_spacing_factor = None
 
-    runlen_y = 360*10
+    runlen_y = 50*360
     writeper = 120
     @veros_method
     def set_parameter(self, vs):
-        vs.identifier = '10_year_0Ma'
+        vs.identifier = '50_years'
 
         vs.nx = 128
         vs.ny = 64
-        vs.nz = 20
+        vs.nz = 30
         vs.dt_mom = 3600.
         vs.dt_tracer = 3600*5.
         vs.runlen = 86400 * self.runlen_y
@@ -43,15 +43,16 @@ class GlobalFlexibleResolutionSetup(VerosSetup):
         vs.enable_cyclic_x = True
 
         # streamfunction
-        vs.congr_epsilon = 1e-10
-        vs.congr_max_iterations = 1000
+        vs.congr_epsilon = 1e-8
+        vs.congr_max_iterations = 20000
 
         # friction
         vs.enable_hor_friction = True
-        vs.A_h = 5e4
+        vs.A_h = (2.8 * vs.degtom)**3 * 2e-11
         vs.enable_hor_friction_cos_scaling = True
         vs.hor_friction_cosPower = 1
         vs.enable_tempsalt_sources = True
+
         vs.enable_implicit_vert_friction = True
 
         vs.eq_of_state_type = 5
@@ -59,9 +60,9 @@ class GlobalFlexibleResolutionSetup(VerosSetup):
         # isoneutral
         vs.enable_neutral_diffusion = True
         vs.K_iso_0 = 1000.0
-        vs.K_iso_steep = 50.0
-        vs.iso_dslope = 0.005
-        vs.iso_slopec = 0.005
+        vs.K_iso_steep = 500.0
+        vs.iso_dslope = 0.001
+        vs.iso_slopec = 0.001
         vs.enable_skew_diffusion = True
 
         # tke
@@ -90,6 +91,7 @@ class GlobalFlexibleResolutionSetup(VerosSetup):
         # idemix
         vs.enable_idemix = False
         vs.enable_eke_diss_surfbot = True
+        
         vs.eke_diss_surfbot_frac = 0.2
         vs.enable_idemix_superbee_advection = True
         vs.enable_idemix_hor_diffusion = True

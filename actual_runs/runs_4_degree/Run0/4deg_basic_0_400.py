@@ -25,12 +25,12 @@ class GlobalFourDegreeSetup(VerosSetup):
     """
     @veros_method
     def set_parameter(self, vs):
-        vs.identifier = '4deg-0ma-10y'
+        vs.identifier = '4deg-0ma-250y'
 
         vs.nx, vs.ny, vs.nz = 90, 40, 15
         vs.dt_mom = 1800.0
         vs.dt_tracer = 86400.0
-        vs.runlen = 360*3600*24
+        vs.runlen = 360*3600*24 * 50
 
         vs.coord_degree = True
         vs.enable_cyclic_x = True

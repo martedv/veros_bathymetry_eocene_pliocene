@@ -7,6 +7,7 @@ import csv
 import os
 import re
 import cartopy.crs as ccrs
+import xarray as xr
 from matplotlib import animation
 
 dirname = os.path.dirname(__file__)
@@ -23,8 +24,8 @@ filesovert = ['Run0/4deg-0ma-200y.overturning.nc',
 timeAgo = np.arange(0,70,5)
 
 
-averagesdata = [h5netcdf.File(dirname + '../actual_runs/runs_4_degree/' + filename, 'r') for filename in filesavg]
-overturningdata = [h5netcdf.File(dirname + '../actual_runs/runs_4_degree/' + filename, 'r') for filename in filesovert]
+averagesdata = [xr.open_dataset(dirname + '../actual_runs/runs_4_degree/' + filename) for filename in filesavg]
+overturningdata = [xr.open_dataset(dirname + '../actual_runs/runs_4_degree/' + filename) for filename in filesovert]
 
 
 
@@ -33,77 +34,80 @@ zt = averagesdata[0]['zt'][:]
 xt = averagesdata[0]['xt'][:]
 yt = averagesdata[0]['yt'][:]
 
-psidata = np.array([f['psi'][199] for f in averagesdata])
-
-psidata[psidata < -1e17] = np.nan
-
-depth = 8
-ypos = 36
-
-vsf_data = [f['vsf_depth'][199][depth][ypos] for f in overturningdata]
-
-fig, ax = plt.subplots()
-
-scale_y = 1e6
-ticks_y = ticker.FuncFormatter(lambda y, pos: '{0:g}'.format(y/scale_y))
-ax.yaxis.set_major_formatter(ticks_y)
 
 
+def transport(bdepth = 9, bypos = 6):
+    bolus_data = [f['bolus_iso'][199][bdepth][bypos] for f in overturningdata]
+    fig, ax = plt.subplots()
 
-ax.plot(timeAgo, vsf_data)
-ax.set_xlim(65, 0)
-ax.set(xlabel='time (Ma)', ylabel='strength (Sv)',title="overturning at z=%sm y=%sdeg" % (zt[depth],yt[ypos]))
-ax.grid()
-
-#plt.show()
-
-bdepth = 9
-bypos = 6
-
-bolus_data = [f['bolus_iso'][199][bdepth][bypos] for f in overturningdata]
-
-fig, ax = plt.subplots()
-
-scale_y = 1e6
-ticks_y = ticker.FuncFormatter(lambda y, pos: '{0:g}'.format(y/scale_y))
-ax.yaxis.set_major_formatter(ticks_y)
+    scale_y = 1e6
+    ticks_y = ticker.FuncFormatter(lambda y, pos: '{0:g}'.format(y/scale_y))
+    ax.yaxis.set_major_formatter(ticks_y)
 
 
-ax.plot(timeAgo, bolus_data)
-ax.set_xlim(65, 0)
-ax.set(xlabel='time (Ma)', ylabel='strength (10^6 m^3 / s)',title="Meridional transport at z=%sm y=%sdeg" % (zt[bdepth],yt[bypos]))
-ax.grid()
+    ax.plot(timeAgo, bolus_data)
+    ax.set_xlim(65, 0)
+    ax.set(xlabel='time (Ma)', ylabel='strength (10^6 m^3 / s)',title="Meridional transport at z=%sm y=%sdeg" % (zt[bdepth],yt[bypos]))
+    ax.grid()
+    plt.show()
 
-#plt.show()
 
-fig = plt.figure()
 
-ax = plt.axes(projection=ccrs.PlateCarree(
-                            central_longitude=180))
-ax.background_patch.set_facecolor('black')
 
-cf = ax.pcolormesh(xt, yt, psidata[13], vmin=-70e6, vmax=70e6, transform=ccrs.PlateCarree(), cmap='RdBu')
+def streamfunc():
+    psidata = np.array([f['psi'][199] for f in averagesdata])
 
-shapearr = [-250, -80, -50, 90]
-ax.set_extent(shapearr, crs=ccrs.PlateCarree())
-def animate(i):
-    n= 13-i
-    ax.clear()
-    cf = ax.pcolormesh(
-        xt, yt, psidata[n], vmin=-15e6, vmax=15e6, transform=ccrs.PlateCarree(), cmap='RdBu')
-    ax.set_extent(shapearr, crs=ccrs.PlateCarree())
-    ax.set_title('%s Ma years ago' % timeAgo[n])
+    psidata[psidata < -1e17] = np.nan
+    fig = plt.figure()
+
+    ax = plt.axes(projection=ccrs.PlateCarree(
+                                central_longitude=180))
     ax.background_patch.set_facecolor('black')
 
+    cf = ax.pcolormesh(xt, yt, psidata[13], vmin=-70e6, vmax=70e6, transform=ccrs.PlateCarree(), cmap='RdBu')
+
+    shapearr = [-250, -80, -50, 90]
+    ax.set_extent(shapearr, crs=ccrs.PlateCarree())
+    def animate(i):
+        n= 13-i
+        ax.clear()
+        cf = ax.pcolormesh(
+            xt, yt, psidata[n], vmin=-15e6, vmax=15e6, transform=ccrs.PlateCarree(), cmap='RdBu')
+        ax.set_extent(shapearr, crs=ccrs.PlateCarree())
+        ax.set_title('%s Ma years ago' % timeAgo[n])
+        ax.background_patch.set_facecolor('black')
+
+def vsfdepth():
+    vsfdh= np.array([f['vsf_depth'][199] for f in overturningdata])
+    plt.contourf(vsfdh[0])
+    plt.show()
+
+    # fig = plt.figure()
+    # ax = plt.axes()
+    # cf = ax.pcolormesh(xt, yt, vsfdh[13], vmin=-70e6, vmax=70e6, transform=ccrs.PlateCarree(), cmap='RdBu')
+
+    # shapearr = [-250, -80, -50, 90]
+    # ax.set_extent(shapearr, crs=ccrs.PlateCarree())
+    # def animate(i):
+    #     n= 13-i
+    #     ax.clear()
+    #     cf = ax.pcolormesh(
+    #         xt, yt, psidata[n], vmin=-15e6, vmax=15e6, transform=ccrs.PlateCarree(), cmap='RdBu')
+    #     ax.set_extent(shapearr, crs=ccrs.PlateCarree())
+    #     ax.set_title('%s Ma years ago' % timeAgo[n])
+    #     ax.background_patch.set_facecolor('black')
 
 
-anim = animation.FuncAnimation(fig, animate, frames=14, interval=100, blit=False)
-Writer = animation.writers['ffmpeg']
-writer = Writer(fps=2, metadata=dict(
-    artist='Me'), bitrate=1800)
-anim.save('Plots/iso_change.mp4', writer=writer)
+    # anim = animation.FuncAnimation(fig, animate, frames=14, interval=100, blit=False)
+    # Writer = animation.writers['ffmpeg']
+    # writer = Writer(fps=2, metadata=dict(
+    #     artist='Me'), bitrate=1800)
+    # anim.save('Plots/iso_change.mp4', writer=writer)
 
-plt.show()
+    plt.show()
+
+vsfdepth()
+
 for file in averagesdata:
     file.close()
 for file in overturningdata:
