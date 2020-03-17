@@ -41,9 +41,12 @@ One of the changes on which there is general consensus is the inception and expa
 
 The result of these bathymetry changes on the oceanic stream function and the resulting overturning currents is something that has been previously studied by Mulder et al.\cite{Mulder2017Jul} on simplified models. Here for each time step of 5Ma the previous model's outcome were used as initial conditions for the next bathymetry. This results first of all in having to interpolate the forcings at locations where there was previously no ocean and it may also result in finding different equilibrium than those that may be found by studying the changes with exactly the same forcings for every model.
 
-Ocean modeling has been an area of continued progress. The resolutions of the models have been steadily increasing since the inception of the first computerized ocean models. However, due to the age of some of these models and the continued adaptation of often old legacy Fortran code, many models have become enormous hurdles to get started with often resulting in frustration. The Veros\cite{Hafner2018Aug} ocean model project is trying to tackle this problem with a totally new code base written entirely in Python. Veros allows easy editing of forcing and geometry input and infinite flexibility in the model's setup without the hassle of learning Fortran. 
+Ocean modeling has been an area of continued progress. The resolutions of the models have been steadily increasing since the inception of the first computerized ocean models. However, due to the age of some of these models and the continued adaptation of often old legacy Fortran code, many models have become enormous hurdles to get started with often resulting in frustration. The Veros\cite{Hafner2018Aug} ocean model project is trying to tackle this problem with a totally new code base written entirely in Python. Veros allows easy editing of forcing and geometry input and infinite flexibility in the model's setup without the hassle of learning Fortran.
+
+Veros also allows a lot of flexibility in the resolution of ocean models. It allows easy scaling which results in being able to first test some changes on a low resolution model and then slowly scaling up to higher resolutions.
 
 Due to the change in size of the Pacific basin specifically it is very interesting to look at the occurrence of a northern sinking solution similar to the Atlantic we are accustomed to today.
+
 This paper will focus solely on changes in bathymetry using very simplified zonally averaged global forcings. The results of the model will be used to estimate global changes in oceanic through flow at the critical passages. Furthermore the strength of the meridional overturning currents (MOC) will be studied.
 
 
@@ -52,7 +55,7 @@ This paper will focus solely on changes in bathymetry using very simplified zona
 \section{Methods}
 \subsection{On Veros}
 \subsection{Simplified Forcings}
-The simplified forcings used in this paper will mostly consist of zonally averaged forcings taken from existing forcings related to the current ocean. The biggest and most obvious drawback of this approach is ignoring the massive changes in the climate in the time period on which this paper is focused. Another is the fact that zonally averaged forcings are often harder to stabilize for finer grids. 
+The simplified forcings used in this paper will mostly consist of zonally averaged forcings taken from existing forcings related to the current ocean. The biggest and most obvious drawback of this approach is ignoring the massive changes in the climate in the time period on which this paper is focused. Another is the fact that zonally averaged forcings are often harder to stabilize for finer grids.
 
 
 \subsection{Scaling oceanic basins}
