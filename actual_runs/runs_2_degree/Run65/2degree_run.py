@@ -168,7 +168,7 @@ class GlobalFlexibleResolutionSetup(VerosSetup):
         'kbot', 'xt', 'yt', 'zt'
     ])
     def set_topography(self, vs):
-        with xr.open_dataset('TopoBathyc0.nc') as topography_file:
+        with xr.open_dataset('TopoBathyc65.nc') as topography_file:
             topo_x, topo_y, topo_z = (
                 np.array(topography_file[k].values, dtype='float').T
                 for k in ('longitude', 'latitude', 'Z')
