@@ -1,0 +1,2 @@
+Veros v0.2.1
+/home/marte/.local/lib/python3.7/site-packages/veros/setup/global_1deg
