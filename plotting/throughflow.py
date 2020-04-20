@@ -20,7 +20,7 @@ averages = [xr.open_dataset(dirname + '../actual_runs/runs_4_degree/' + s) for s
 xt = averages[0]['xt']
 yt = averages[0]['yt']
 zt = averages[0]['zt']
-def calctf(time, loc):
+def calctf(time, long, minlat, maxlat):
     zonalu = averages[time]['u'][199]
 
     def area(z0, z1, lat0, lat1):
@@ -34,7 +34,7 @@ def calctf(time, loc):
 
         return quad(lambda r: r*(rad0 - rad1), z0, z1)
 
-    zonarr = zonalu[:,:10,-18]
+    zonarr = zonalu[:,minlat:maxlat,long]
 
 
     radearth = 6371000
@@ -53,14 +53,46 @@ def calctf(time, loc):
 
             areaarr[zi,yi], _ = area(radearth + zt[zi], maxz, 4,0)
             throughflow[zi,yi] = areaarr[zi,yi] * y
-    plt.contourf(throughflow)
-    plt.show()
+    
     
     return np.sum(throughflow[~np.isnan(zonarr).values])
-l = [(0,72),(1,72),(2,73),(3,74),(4,75)]
-tfarr = [calctf(i,j) for i,j in l]
+
+def showSelectedCells(time, long, minlat,maxlat):
+    sel = averages[time]['u'][199]
+    mapped = ~np.isnan(sel[14,:,:])
+    cmape = np.zeros(mapped.shape) + 1
+    cmape[mapped] = 0
+
+    cmape[ minlat:maxlat, long] = 5
+    plt.pcolor(cmape)
+    plt.show()
+
 
 t = [0,5,20,40,65]
 
-plt.plot(t, tfarr)
+showSelectedCells(4,35,4,11)
+
+# Probably one of Tasman passage
+
+#flow Under Australia
+parr = np.array([calctf(0,35,4,11),calctf(1,35,4,11), calctf(2,35,4,11), 0,0])
+plt.plot(t, parr / (10**6), label="Tasman Passage")
+
+
+#Indonesian passage
+parr = np.array([0,0, calctf(2,30,18,21), calctf(3,30,16,22), calctf(4,31,14,20)])
+plt.plot(t, parr / (10**6), label="Indonesian Passage")
+
+#Drake passage
+tfarr = np.array([calctf(0,72,2,7), calctf(1,72,2,7),calctf(2,72,2,7), calctf(3,73,1,6), calctf(4,72,4,6)])
+plt.plot(t, tfarr / (10**6), label="Drake Passage")
+
+#Panama passage
+parr = np.array([0,0, calctf(2,71,20,24), calctf(3,73,20,24), calctf(4,75,20,24)])
+plt.plot(t, parr / (10**6), label="Pannema Passage")
+
+plt.xlim(65,0)
+plt.legend()
+plt.xlabel('Years ago')
+plt.ylabel('Sverdrups (Sv)')
 plt.show()
