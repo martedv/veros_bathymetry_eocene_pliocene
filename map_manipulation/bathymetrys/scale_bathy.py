@@ -17,16 +17,23 @@ import struct
 
 
 dirname = os.path.dirname(__file__)
-def resize_bathy(file):
+def resize_bathy(file,time):
     with xr.open_dataset(file) as f:
         topo_z = f['Z'].values
 
-        topo_z[topo_z > 0] = 0.
+        topo_z[topo_z >= -100] = 0.
 
+        
+
+        maskimg = Image.fromarray(topo_z >= 0)
+        maskimg = maskimg.rotate(180)
+        maskimg = maskimg.transpose(Image.FLIP_LEFT_RIGHT)
+        #maskimg = maskimg.crop((0, 20, 720, 360))
+        maskimg.save("masks_4deg/mask_original{}.jpg".format(time))
 
         oceanfloor = Image.fromarray(topo_z)
         oceanfloor = oceanfloor.crop((0, 20, 720, 360))
-        oceanfloor_resize = np.array(oceanfloor.resize((128, 64), resample=3))
+        oceanfloor_resize = np.array(oceanfloor.resize((90, 40), resample=3))
         oceanfloor_resize[0:2] = 0.
         oceanfloor_resize[-2::] = 0.
 
@@ -44,6 +51,11 @@ def resize_bathy(file):
         
 
         mask = np.array(oceanfloor_resize) >= -30
+
+        maskimg = Image.fromarray(mask)
+        maskimg = maskimg.rotate(180)
+        maskimg = maskimg.transpose(Image.FLIP_LEFT_RIGHT)
+        maskimg.save("masks_4deg/mask{}.jpg".format(time))
         
 
         
@@ -54,14 +66,14 @@ def resize_bathy(file):
 
 
         return np.roll(actual, 45)
-with h5netcdf.File(dirname + '/simplified_forcings_2d.nc', 'r') as f:
+with h5netcdf.File('simplified_baths_old.nc', 'r') as f:
     xt = f['xt'][:]
     yt = f['yt'][:]
 
 
-with h5netcdf.File(dirname + '/simplified_baths.nc', 'w') as oc:
-    oc._create_dimension("xt", 128)
-    oc._create_dimension("yt", 64)
+with h5netcdf.File('simplified_baths_4deg.nc', 'w') as oc:
+    oc._create_dimension("xt", 90)
+    oc._create_dimension("yt", 40)
     oc._create_dimension("Time", 14)
 
 
@@ -77,7 +89,7 @@ with h5netcdf.File(dirname + '/simplified_baths.nc', 'w') as oc:
     allbaths = []
     for i in range(14):
         allbaths = allbaths + \
-            [resize_bathy(dirname + '/Originals/TopoBathyc{}.nc'.format(i*5))]
+            [resize_bathy('Originals/TopoBathyc{}.nc'.format(i*5),i*5)]
    
     oc.create_variable("bathymetry", ("Time", "yt", "xt",),
                        data=allbaths)

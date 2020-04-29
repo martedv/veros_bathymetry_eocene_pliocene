@@ -11,6 +11,7 @@ import matplotlib.pyplot as plt
 
 BASE_PATH = os.path.dirname(os.path.realpath(__file__))
 
+year = 1
 
 class GlobalFourDegreeSetup(VerosSetup):
     """Global 4 degree model with 15 vertical levels.
@@ -25,12 +26,12 @@ class GlobalFourDegreeSetup(VerosSetup):
     """
     @veros_method
     def set_parameter(self, vs):
-        vs.identifier = '4deg-0ma-10y'
+        vs.identifier = '4deg-0ma-200y'
 
         vs.nx, vs.ny, vs.nz = 90, 40, 15
         vs.dt_mom = 1800.0
         vs.dt_tracer = 86400.0
-        vs.runlen = 360*3600*24
+        vs.runlen = 360*3600*24 * 200
 
         vs.coord_degree = True
         vs.enable_cyclic_x = True
@@ -104,7 +105,7 @@ class GlobalFourDegreeSetup(VerosSetup):
 
     @veros_method
     def _read_bath(self, vs, var):
-        with h5netcdf.File('simplified_baths.nc', 'r') as infile:
+        with h5netcdf.File('manual_baths_4deg_test.nc', 'r') as infile:
             var_obj = infile.variables[var]
             return infile[var][:]
 
@@ -116,7 +117,7 @@ class GlobalFourDegreeSetup(VerosSetup):
         vs.dxt[:] = 4.0
         vs.dyt[:] = 4.0
         vs.y_origin = -76.0
-        vs.x_origin = 4.0
+        vs.x_origin = 184.0
 
     @veros_method
     def set_coriolis(self, vs):
@@ -127,13 +128,17 @@ class GlobalFourDegreeSetup(VerosSetup):
         'kbot'
     ])
     def set_topography(self, vs):
-        bathymetry_data = np.transpose(self._read_bath(vs, 'bathymetry')[0])
+
+        bathymetry_data = np.transpose(self._read_bath(vs, 'bathymetry')[year])
+        mask = np.transpose(self._read_bath(vs, 'mask')[year])
+
         salt_data = self._read_forcing(vs, 'salinity')[:, :, ::-1]
+
         depth = np.flip(np.array([-35., -65., -175., -265., -455., -645., -935., -
                                   1225., -1615., -2005, -2495., -2985., -3575., -4165., -4855.]))
 
         salty = salt_data
-        mask_bathy = bathymetry_data == 0.
+        mask_bathy = mask == 1.
         salty[mask_bathy] = np.zeros((15))
         # set salt data to correct height
         for x, xarr in enumerate(bathymetry_data):
@@ -163,6 +168,7 @@ class GlobalFourDegreeSetup(VerosSetup):
         vs.salt[2:-2, 2:-2, :, :2] = salt_data[..., np.newaxis] * \
             vs.maskT[2:-2, 2:-2, :, np.newaxis]
 
+        # use Trenberth wind stress from MITgcm instead of ECMWF (also contained in ecmwf_4deg.cdf)
         vs.taux[2:-2, 2:-2, :] = self._read_forcing(vs, 'tau_x')
         vs.tauy[2:-2, 2:-2, :] = self._read_forcing(vs, 'tau_y')
 
