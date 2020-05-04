@@ -16,12 +16,12 @@ rc('text', usetex=True)
 
 dirname = os.path.dirname(__file__)
 
-filesovert = ['Run0/4deg-0ma-200y.overturning.nc',
-        'Run5/4deg-5ma-200y.overturning.nc', 'Run10/4deg-10ma-200y.overturning.nc', 'Run15/4deg-15ma-200y.overturning.nc', 'Run20/4deg-20ma-200y.overturning.nc',
-        'Run25/4deg-25ma-200y.overturning.nc', 'Run30/4deg-30ma-200y.overturning.nc', 'Run35/4deg-35ma-200y.overturning.nc', 'Run40/4deg-40ma-200y.overturning.nc', 
-        'Run45/4deg-45ma-200y.overturning.nc', 'Run50/4deg-50ma-200y.overturning.nc', 'Run55/4deg-55ma-200y.overturning.nc', 'Run60/4deg-60ma-200y.overturning.nc','Run65/4deg-65ma-200y.overturning.nc']
+filesovert = ['Run0/run_0ma.0099.overturning.nc',
+        'Run5/run_5ma.0099.overturning.nc', 'Run10/run_10ma.0099.overturning.nc', 'Run15/run_15ma.0099.overturning.nc', 'Run20/run_20ma.0099.overturning.nc',
+        'Run25/run_25ma.0099.overturning.nc', 'Run30/run_30ma.0099.overturning.nc', 'Run35/run_35ma.0099.overturning.nc', 'Run40/run_40ma.0099.overturning.nc', 
+        'Run45/run_45ma.0099.overturning.nc', 'Run50/run_50ma.0099.overturning.nc', 'Run55/run_55ma.0099.overturning.nc', 'Run60/run_60ma.0099.overturning.nc','Run65/run_65ma.0099.overturning.nc']
 
-overt = [xr.open_dataset(dirname + '../actual_runs/runs_4_degree/' + filename) for filename in filesovert]
+overt = [xr.open_dataset(dirname + '../actual_runs/runs_4_degree_manual/' + filename) for filename in filesovert]
 
 yt = overt[0]['yt'].values
 zt = overt[0]['zt'].values
@@ -36,7 +36,7 @@ for row in ax:
     for col in row:
         if i > 13:
                 continue
-        cbar_ = col.pcolormesh(yt,zt, (overt[13 - i]['vsf_depth'][199].values + overt[13 - i]['bolus_depth'][199].values) / (10**6) , vmin=-25, vmax=25, cmap='coolwarm')
+        cbar_ = col.pcolormesh(yt,zt, (overt[13 - i]['vsf_depth'][0].values + overt[13 - i]['bolus_depth'][0].values) / (10**6) , vmin=-25, vmax=25, cmap='coolwarm')
         col.yaxis.set_major_formatter(ticker.FormatStrFormatter("$%i$ m"))
         col.xaxis.set_major_formatter(ticker.FormatStrFormatter("$%i^{\circ}$"))
         col.set_title('%i Ma' % t[13 - i])

@@ -23,7 +23,7 @@ def resize_bathy(file):
 
         oceanfloor = Image.fromarray(topo_z)
         oceanfloor = oceanfloor.crop((0, 20, 720, 340))
-        oceanfloor_resize = np.array(oceanfloor.resize((90, 40), resample=2))
+        oceanfloor_resize = np.array(oceanfloor.resize((90, 40), resample=3))
 
 
         return oceanfloor_resize
@@ -50,7 +50,7 @@ with h5netcdf.File('manual_baths_4deg_test.nc', 'w') as oc:
     allislands = []
     for t in time:
         print(t)
-        with Image.open('custom_masks/mask{}.jpg'.format(t)) as i:
+        with Image.open('redone_masks/mask{}.jpg'.format(t)) as i:
             arr = np.copy(np.asarray(i))
         arr[arr > 155] = 255
         arr[arr <= 155] = 0
