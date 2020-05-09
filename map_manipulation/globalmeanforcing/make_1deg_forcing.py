@@ -15,13 +15,41 @@ def resize_array(toresize):
 
     return _resize
 
+simplified = h5netcdf.File('simplified_forcings.nc')
+
+yt = np.array(simplified['yt'][:])
+xt = np.array(simplified['xt'][:])
+zt = np.array(simplified['zt'][:])
+simplified.close()
 with h5netcdf.File('idealized_forcing_1deg.nc') as f:
     #Q_net
+    ddz = np.array([50., 70., 100., 140., 190., 240., 290., 340.,
+                        390., 440., 490., 540., 590., 640., 690.])
+    zt_1 = np.array(f['zt'][:])
+    lower = []
+    upper = []
 
+    for i, z in enumerate(zt):
+        
+        lower = lower + [zt_1.size - np.searchsorted(zt_1[::-1], z - (ddz[i]/2),side='right')]
+        upper = upper + [zt_1.size - np.searchsorted(zt_1[::-1], z + (ddz[i]/2),side='right')]
+    
+    temp = np.array([resize_array(f['temperature'][:][i]) for i in range(0,115)])
+    tempscaled = [np.mean(temp[upper[i]:lower[i]],axis=0) for i in range(0,15)]
+    tempy = []
+    for i, s in enumerate(tempscaled):
+        tempy = tempy + [np.transpose([np.append((np.flip(s[:,0][20:40]) + s[:,0][0:20]) / 2,(np.flip(s[:,0][0:20]) + s[:,0][20:40]) / 2)]*90)]
+    
+
+    salt = np.array([resize_array(f['salinity'][:][i]) for i in range(0,115)])
+    saltscaled = np.array([np.mean(salt[upper[i]:lower[i]],axis=0) for i in range(0,15)])
+    salty = []
+    for i, s in enumerate(saltscaled):
+        salty = salty + [np.transpose([np.append((np.flip(s[:,0][20:40]) + s[:,0][0:20]) / 2,(np.flip(s[:,0][0:20]) + s[:,0][20:40]) / 2)]*90)]
+    
     #sst as in paper
     #sss as in paper
-    #tau_x profile as in paper
-
+    #tau_x profile With analytical
     #salinity
     #temprature
     #tidal_energy
@@ -33,21 +61,39 @@ with h5netcdf.File('idealized_forcing_1deg.nc') as f:
     #zt
     
     q_net_m = [resize_array(f['q_net'][:][i]) for i in range(0,12)]
-    tau_y = np.zeros((12,40,90))
+    q_nec_m = [resize_array(f['dqdt'][:][i]) for i in range(0,12)]
+    tau_y_m = np.zeros((12,40,90))
+    
+    tau_x_m = np.array([resize_array(f['tau_x'][:][i]) for i in range(0,12)])
+    taptoe = np.mean(tau_x_m,axis=0)
+    new_tau = np.append((np.flip(taptoe[:,0][20:40]) + taptoe[:,0][0:20]) / 2, (np.flip(taptoe[:,0][0:20]) + taptoe[:,0][20:40]) / 2)
+    new_tau = np.array([np.transpose(np.array([new_tau] * 90))]*12)
+    
+    sst_m = np.array([np.transpose([12.5 + 12.5*np.cos(np.pi * yt/80)]*90)]*12)
+    
+    sss_m = np.mean(np.array([resize_array(f['sss'][:][i]) for i in range(0,12)]),axis=0)
+
+    new_sss = np.append((np.flip(sss_m[:,0][20:40]) + sss_m[:,0][0:20]) / 2, (np.flip(sss_m[:,0][0:20]) + sss_m[:,0][20:40]) / 2)
+    new_sss = np.array([np.transpose(np.array([new_sss] * 90))]*12)
 
     with h5netcdf.File('idealized_forcing_4deg.nc', 'w') as oc:
         oc._create_dimension("xt", 90)
         oc._create_dimension("yt", 40)
         oc._create_dimension("zt", 15)
         oc._create_dimension("Time", 12)
+        oc.create_variable("xt", ("xt",), data=xt)
+        oc.create_variable("yt", ("yt",), data=yt)
+        oc.create_variable("zt", ("zt",), data=zt)
 
-        
+        #probly look at q_net
         oc.create_variable("q_net", ("Time","yt","xt",), data=q_net_m)
-        oc.create_variable("tau_y", ("Time","yt","xt",), data=tau_y)
-    
-
-
-
+        oc.create_variable("tau_y", ("Time","yt","xt",), data=tau_y_m)
+        oc.create_variable("tau_x", ("Time","yt","xt",), data=new_tau)
+        oc.create_variable("sst", ("Time","yt","xt",), data=sst_m)
+        oc.create_variable("sss", ("Time","yt","xt",), data=new_sss)
+        oc.create_variable("temperature", ("zt","yt","xt",), data=tempscaled)
+        oc.create_variable("salinity", ("zt","yt","xt",), data=salty)
+        oc.create_variable("q_nec", ("Time","yt","xt",), data=q_nec_m)
 
 
 # with h5netcdf.File(dirname + '/forcing_1deg_global_interpolated.nc','r') as f:
