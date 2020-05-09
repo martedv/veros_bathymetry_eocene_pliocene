@@ -76,22 +76,22 @@ t = [0,5,10,15,20,25,30,35,40,45,50,55,60,65]
 # Probably one of Tasman passage
 
 # #flow Under Australia
-# parr = np.array([calctf(0,35,4,11),calctf(1,35,4,11),calctf(2,35,4,11), calctf(3,35,4,11),calctf(4,35,4,11),calctf(5,35,4,11),calctf(6,35,4,11),calctf(7,35,4,11),calctf(8,35,4,11),0,0,0,0,0])
-# plt.plot(t, parr / (10**6), label="Tasman Passage")
+parr = -np.array([calctf(0,35,4,11),calctf(1,35,4,11),calctf(2,35,4,11), calctf(3,35,4,11),calctf(4,35,4,11),calctf(5,35,4,11),calctf(6,35,4,11),calctf(7,35,4,11),calctf(8,35,4,11),0,0,0,0,0])
+plt.plot(t, parr / (10**6), label="Tasman Passage")
 
 
 # # #Indonesian passage
-parr = np.array([calctf(0,29,16,20),0, calctf(2,29,16,21), calctf(3,29,16,21), calctf(4,30,16,21), calctf(5,29,15,21),calctf(6,29,14,21),calctf(7,29,14,21),calctf(8,30,16,22),calctf(9,30,17,21),calctf(10,30,16,21), calctf(11,31,16,21),
+parr = -np.array([calctf(0,29,16,20),0, calctf(2,29,16,21), calctf(3,29,16,21), calctf(4,30,16,21), calctf(5,29,15,21),calctf(6,29,14,21),calctf(7,29,14,21),calctf(8,30,16,22),calctf(9,30,17,21),calctf(10,30,16,21), calctf(11,31,16,21),
  calctf(12,31,15,21), calctf(13,31,15,21)])
 plt.plot(t, parr / (10**6), label="Indonesian Passage")
 
 # # #Drake passage
-# tfarr = np.array([calctf(0,72,2,7),calctf(1,72,2,7), calctf(2,72,2,7), calctf(3,72,2,7), calctf(4,72,2,7), calctf(5,73,2,5),calctf(6,73,2,5),calctf(7,73,2,5),calctf(8,73,3,4),calctf(9,73,3,4),calctf(10,71,3,4), calctf(11,72,4,5),
-#   calctf(12,72,4,5), calctf(13,72,4,5)])
-# plt.plot(t, tfarr / (10**6), label="Drake Passage")
+tfarr = -np.array([calctf(0,72,2,7),calctf(1,72,2,7), calctf(2,72,2,7), calctf(3,72,2,7), calctf(4,72,2,7), calctf(5,73,2,5),calctf(6,73,2,5),calctf(7,73,2,5),calctf(8,73,3,4),calctf(9,73,3,4),calctf(10,71,3,4), calctf(11,72,4,5),
+  calctf(12,72,4,5), calctf(13,72,4,5)])
+plt.plot(t, tfarr / (10**6), label="Drake Passage")
 
 #Panama passage
-parr = np.array([0,0, calctf(2,71,20,24), calctf(3,69,21,22), calctf(4,72,22,23), 0, calctf(6,71,20,21), calctf(7,71,20,21),
+parr = -np.array([0,0, calctf(2,71,20,24), calctf(3,69,21,22), calctf(4,72,22,23), 0, calctf(6,71,20,21), calctf(7,71,20,21),
  calctf(8,71,19,21),calctf(9,71,18,21),calctf(10,71,18,23),calctf(11,72,18,24),calctf(12,72,19,24),calctf(13,73,19,24),])
 plt.plot(t, parr / (10**6), label="Pannema Passage")
 
