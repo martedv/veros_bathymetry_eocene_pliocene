@@ -14,14 +14,13 @@ import matplotlib.ticker as ticker
 from scipy.integrate import quad
 rc('text', usetex=True)
 
-dirname = os.path.dirname(__file__)
 
-filesovert = ['Run0/run_0ma.0149.overturning.nc',
-        'Run5/run_5ma.0149.overturning.nc', 'Run10/run_10ma.0149.overturning.nc', 'Run15/run_15ma.0149.overturning.nc', 'Run20/run_20ma.0149.overturning.nc',
-        'Run25/run_25ma.0149.overturning.nc', 'Run30/run_30ma.0149.overturning.nc', 'Run35/run_35ma.0149.overturning.nc', 'Run40/run_40ma.0149.overturning.nc', 
-        'Run45/run_45ma.0149.overturning.nc', 'Run50/run_50ma.0149.overturning.nc', 'Run55/run_55ma.0149.overturning.nc', 'Run60/run_60ma.0149.overturning.nc','Run65/run_65ma.0149.overturning.nc']
+filesovert = ['Run0/run_0ma.0009.overturning.nc',
+        'Run5/run_5ma.0009.overturning.nc', 'Run10/run_10ma.0009.overturning.nc', 'Run15/run_15ma.0009.overturning.nc', 'Run20/run_20ma.0009.overturning.nc',
+        'Run25/run_25ma.0009.overturning.nc', 'Run30/run_30ma.0009.overturning.nc', 'Run35/run_35ma.0009.overturning.nc', 'Run40/run_40ma.0009.overturning.nc', 
+        'Run45/run_45ma.0009.overturning.nc', 'Run50/run_50ma.0009.overturning.nc', 'Run55/run_55ma.0009.overturning.nc', 'Run60/run_60ma.0009.overturning.nc','Run65/run_65ma.0009.overturning.nc']
 
-overt = [xr.open_dataset(dirname + '../actual_runs/runs_4_degree_final/' + filename) for filename in filesovert]
+overt = [xr.open_dataset('../actual_runs/runs_4_degree_final_forcing/' + filename) for filename in filesovert]
 
 yt = overt[0]['yt'].values
 zt = overt[0]['zt'].values

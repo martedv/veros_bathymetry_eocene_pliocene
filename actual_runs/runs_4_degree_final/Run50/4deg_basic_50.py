@@ -99,7 +99,7 @@ class GlobalFourDegreeSetup(VerosSetup):
 
     @veros_method
     def _read_forcing(self, vs, var):
-        with h5netcdf.File('simplified_forcings.nc', 'r') as infile:
+        with h5netcdf.File('idealized_forcing_4deg.nc', 'r') as infile:
             var_obj = infile.variables[var]
             return np.array(var_obj, dtype=str(var_obj.dtype)).T
 
