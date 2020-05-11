@@ -1,8 +1,11 @@
 \documentclass[a4paper]{article}
 
+
+
 %Packages included
 \usepackage{graphicx}
 \usepackage{multicol}
+\usepackage{hyperref}
 \usepackage[headings]{fullpage}
 \usepackage{fancyhdr}
 \usepackage{float}
@@ -10,6 +13,8 @@
 \usepackage{subcaption}
 \usepackage[
 backend=bibtex,
+citestyle=authoryear,
+sorting=none
 ]{biblatex}
 \addbibresource{../bibliography/refrencedpapers.bib}
 
@@ -25,7 +30,7 @@ backend=bibtex,
 \pagestyle{fancy}
 \fancyhead{}
 \fancyfoot{}
-\fancyhead[C]{\textit{The Effect of Bathymetry Changes on Meridional Overturning Currents}}
+\fancyhead[C]{\textit{The Effect of Bathymetry Changes on Overturning Circulation}}
 \fancyhead[L]{\thepage}
 \renewcommand{\headrulewidth}{0pt}
 
@@ -39,207 +44,87 @@ backend=bibtex,
 \noindent\rule{\textwidth}{1pt}
 \begin{multicols}{2}
 \section{Introduction}
-
-The geometry and resulting bathymetry of our planet is an ever changing phenomenon\cite{besse2002apparent}. In the last 120 Ma the earth moved from having one major oceanic system in the Pacific with a single large continent, to the current 3 ocean system. The Bathymetry changes that occurred in this time period are characterized by the opening and closing of certain passages through which exchange of water between the oceanic basins is characterized. The exact timing of passage openings is a topic of rigorous debate in literature\cite{Scher2006Apr}\cite{Schmidt2007Jan}.
-
-
-One of the changes on which there is general consensus is the inception and expansion of the Atlantic ocean and the resulting decrease in size of the Pacific basin. The creation of the Atlantic basin has had major effects on the earth's climate especially resulting in massive localized changes such as the temperate European climate due to the north Atlantic meridional overturning current (AMOC).This current creates the current northern sinking situation in the Atlantic basin. These overturning currents are a large driver for the climates in the coastal regions of the earth moving a lot of thermal energy to higher latitudes. However it is unknown when exactly this northern sinking started. With the past non-existance of the Atlantic it must have started some time in the last 40Ma with the advent of a larger Atlantic. 
-
-The result of these bathymetry changes on the oceanic stream function and the resulting overturning currents is something that has been previously studied by Mulder et al.\cite{Mulder2017Jul} on simplified models. Here for each time step of 5Ma the previous model's outcome were used as initial conditions for the next bathymetry. This results first of all in having to interpolate the forcings at locations where there was previously no ocean and it may also result in finding different equilibrium than those that may be found by studying the changes with exactly the same forcings for every model.
-
-Ocean modeling has been an area of continued progress. The resolutions of the models have been steadily increasing since the inception of the first computerized ocean models. However, due to the age of some of these models and the continued adaptation of often old legacy Fortran code, many models have become enormous hurdles to get started with often resulting in frustration. The Veros\cite{Hafner2018Aug} ocean model project is trying to tackle this problem with a totally new code base written entirely in Python. Veros allows easy editing of forcing and geometry input and infinite flexibility in the model's setup without the hassle of learning Fortran.
-
-Veros also allows a lot of flexibility in the resolution of ocean models. It allows easy scaling which results in being able to first test some changes on a low resolution model and then slowly scaling up to higher resolutions.
-
-This paper will focus solely on changes in bathymetry using very simplified zonally averaged global forcings. The results of the model will be used to estimate global changes in oceanic through flow at the critical passages. Furthermore the strength of the meridional overturning currents (MOC) will be studied.
-
-Horizontal wind driven circulation
-
-The gateways in the oceans are the connections between the diffirent oceans. 
-
+\input{content/introduction}
 
 \section{Methods}
-\subsection{On Veros}
-Veros is a flexible ocean model specifically designed for studying simple problems in oceanography. It is a strictly Ocean only model based on the succesful PyOm2 model. It was designed from the ground up with flexibility in mind. Written entirely in python. A language that is now widely deployed and taught too many students unlike it's Fortran predecessor. This allows easy editing of the code running the ocean model itself during the research phase. Cutting valuable time spent on figuring out the often cumbersome Fortran models of the past. Veros is specifically well suited for researching the effect of changes in both forcings and bathymetrys. They can be easily edited using Python. These features in particular are heavily used in this paper. One of the most extensively used features for example is the fact that any bathymetry can without further manual specifications of islands be used for stream function calculation.
 
-%TODO Mathematics behind the model. Continouation mechanics.
+%\subsection{On Veros}
+%\input{content/veros}
 
 
-\subsection{Simplified Forcings}
-The simplified forcings used in this paper will mostly consist of zonally averaged forcings taken from existing forcings from the current ocean. The biggest and most obvious drawback of this approach is ignoring the massive changes in the climate in the time period on which this paper is focused. Another is the fact that zonally averaged forcings are often harder to stabilize for finer grids.
+\input{content/forcings}
 
-
-Diffirence with the paper on continuation mechanics. (etc...)
-
-\subsection{Scaling oceanic basins}
-
-Method for making Masks.
-
-Method for making Depth profiles.
-
-
-\subsection{Creating Bathymetries}
-Creating the bathymetries for the model was done using bathymetries from Muller et al.\cite{Muller2008Mar} these were scaled to a 4 degree model and subsequently changed to address passage openings in the 4 degree case where, due to the low resolution of the model, choices have to be made with respect to the opening of certain passages. One of the choices that was made specifically is to change the bathymetry of the standard 4 degree model to a custom one made in the same process as the other bathymetries too more accurately portray changes that occur using this process. One of the choices that was made is that the northern Sea is closed of in all of the bathymetries. This is mainly due to the fact that 4 degree models do not have enough resolution to support This sea and can cause strange behaviour to occur. Also there is little connection to the other oceans, thus negating the need for such a basin to be in our model.
-
-The main events that shape the oceanic passages can be devided into time periods. These time periods are defined as follows in this paper. This deviates from their definitions in literature but serves only as a means of applying a name to the time steps.
-
-\begin{table}[H]
-	\begin{tabular}{lll}
-		&From &Until \\
-		Paleocene & 65Ma&55Ma    \\
-		Eocene    & 50Ma&35Ma     \\
-		Oligocene & 30Ma&20Ma    \\
-		Miocene   & 20Ma&Present 
-	\end{tabular}
-\end{table}
-
-%TODO (Relevant figures from paleoscene showing changes)
-The model is started in the Paleocene where in the beginning a vast Pacific exists almost serving as a single basin. This period is largely characterized by the growth and development of a larger atlantic basin. Serving to decrease the size of the pacific basin. This can be seen in Figure %TODO add figures showing diffirence in size. 
-Where the changes during the paleoscene are shown.
-\begin{figure}[H]
-	
-	
-	\centering
-	\begin{subfigure}[b]{\linewidth}
-		\centering
-		\includegraphics[width=\linewidth]{bathymetry/baath_65.png}
-		\caption{Beginning of the Paleocene}
-	\end{subfigure}
-\begin{subfigure}[b]{\linewidth}
-	\centering
-	\includegraphics[width=\linewidth]{bathymetry/baath_50.png}
-	\caption{End of the Paleocene}
-\end{subfigure}
-	\caption{}
-	\label{fig:paleocene_bath}
-\end{figure}
-
-
-%TODO Eocene Drake-indian-tasman passages + depth
-
-The Eocene in contrast to the Paleocene is destinguised by The opening of certain passages connecting oceanic basins. These effects are often studied extensively for each individual passage. Choosing the exact timespan for opening the passages is done manualy by looking at often active research takin into account big uncertaincies in the exact timing of the openings. The Eocene is characterized by several large events shown in Figure %todo add figure showing the events in detail
-The first of such events that occurs is the indian continent colliding with the eurasian continent This has the effect of closing the deep water formations between the Thetys sea and the Indian ocean.
-Next the Tasman passage is opened\cite{Lawver2003Sep} as a shallow passage slowly growing in size. The tasman passage opening is believed to have had a large impact on the onset of the ACC. The Total circulation of water around the antartic basin is finalized by the opening of the shallow Drake passage some 30Ma. 30Ma is specifically chosen to diffirentiate between the diffirent passage openings. Especially since there is still ongoing debate on the exact timing of drake passage opening.
-%30ma drake passage opening (chosen as to diffirentiate between diffirent stages)
-%35ma Indian passage closure
-%35ma Tasman passage opening
-%Indian continent colliding
-
-%TODO Oligocene changes
-The next time period is the oligocene Which is largely characterized by the deepening of the Tasman and drake passage and further expansion of the atlantic basin. It is believed %source
-That the onset of the northern sinking atlantic started in this time period. Also the ACC probably is increasing in strenght.
-
-
-%TODO Miocene
-
-The miocene is Characterized by yet more increase in strenght of the ACC. Also Some more passage closures occur. Starting with the closure of the Thetys Seaway which had been decreasing in size in the previous 20Ma. Also the passage between modern day australia and indonesia is significantly decreasing in size due to the onset  of multiple vulcanic islands making the passage more narrow and shallow. Showing especially in this model. Further more the Thethys gateway
-%0Ma current
-%5Ma Wider Indonesia
-%10ma last CAS
-%14ma Thetys seaway last open 15ma first occurrence
-
-
-
-Drake passage opening \cite{Scher2006Apr}
-
-Tasman passage opening 
-
-Central American seaway closure \cite{Molnar2008Jun} (deepwater 7Ma (10 for paper))\cite{Pindell1988Dec}
-
-Tethys seaway closure \cite{Hamon2013Nov}
-
-Widening of indonsian seaway (due to australia moving up.)
-
-
-titis passage opening 
-
-Choises made. 
-
-Examples of where these choises interfere with reality.
-
-Individual passages.
-
-What age are we dealing with (Events/Changes observed in literature)
-
-
-
-
-\subsection{Measuring overturning currents}
-About the overturning currents
-
-converting the data from \cite{Muller2008Mar} to veros
-
-ignoring many things
-idealized global temprature profile
-idealized global salinity
-idealized global wind stress
-
-
-\section{Results}
-
-\subsection{Model speed}
-
-Discuss how fast the model runs.
-
-Discuss the changes made to the model to make it faster.
-
-
-\subsection{Stabilizing of the models}
-When do we stop (how long did we run the model for?)
-Choosing a stopping point.
-
-
-\subsection{Passage throughflow}
-
-Drake passage
-Titis
-Panama
-
-\subsection{Changes in the MOC}
-
-Strength at certain latitudes/longitudes.
-
-What events do we observe/ do we not observe.
-
-\subsection{Stream function}
-
-
-
-\section{Summary}
-
-What do we observe (about the northern/southern sinking solutions.)
-
-
-\section{Discussion}
-Discuss the results and flaws in these.
-
-Discuss possible future research.
-
-Discuss possible improvements.
-
-Discuss possible 2 degree models.
-
-Discuss troubles with the ACC strength due to the forcings of the current climate.
-
-Discuss the difficulty with trail and error in the model.
-
-
-
-\section{Test images}
-\begin{figure}[H]
-	\includegraphics[width=\linewidth]{overturning_overview.png}
-	\caption{test caption}
-	\label{fig:example1}
-\end{figure}
 \end{multicols}
 %example full width overturning
+
 \begin{figure}[H]
-	\includegraphics[width=\linewidth]{overturning_overview.png}
-	\caption{test caption}
-	\label{fig:example1}
+\begin{subfigure}{.5\textwidth}
+	\includegraphics[width=0.9\linewidth]{sss_sst_profile.png}
+	\caption{SSS and SST}
+	\label{fig:sst_sss}
+\end{subfigure}
+\begin{subfigure}{.5\textwidth}
+	\centering
+	% include first image
+	\includegraphics[width=0.9\linewidth]{tau_x_profile.png}
+	\caption{Zonal wind stress ($\tau_x$) profile}
+	\label{fig:tau_X}
+\end{subfigure}
+
+\caption{Idealized forcing profiles}
+
 \end{figure}
 
 \begin{multicols}{2}
+\subsection{Creating Bathymetries}
+
+(Section on how I created the geometries for veros)
+$90/100$ done
+%\input{content/bathymetries}
+
+\subsection{Model running}
+
+(Section on how the model was run (script making sure it is as fast as possible etc.))
+%\input{content/modelsetup}
+$80/100$ done
+\section{Results}
+\subsection{Stabilizing of the models}
+(Section on when the integration was stopped. How good it is etc.)
+$60/100$ done
+
+
+\subsection{Passage throughflow}
+(Section on throughflow for each passage)
+$50/100$ done
+
+\subsection{Stream function}
+
+(Section on the Long-Lat stream function and vertical zonnally integrated streamfunction)
+$60/100$ done
+\section{Summary}
+%\input{content/summary}
+$0/100$ done
+
+\section{Discussion}
+%\input{content/discussion}
+$0/100$ done
+
+
+%\section{Test images}
+%\begin{figure}[H]
+%	\includegraphics[width=\linewidth]{overturning_overview.png}
+%	\caption{test caption}
+%	\label{fig:example1}
+%\end{figure}
+%\end{multicols}
+%%example full width overturning
+%\begin{figure}[H]
+%	\includegraphics[width=\linewidth]{overturning_overview.png}
+%	\caption{test caption}
+%	\label{fig:example1}
+%\end{figure}
+%
+%\begin{multicols}{2}
 
 \printbibliography
 
