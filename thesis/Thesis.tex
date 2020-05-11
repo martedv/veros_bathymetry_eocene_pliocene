@@ -48,9 +48,6 @@ sorting=none
 
 \section{Methods}
 
-%\subsection{On Veros}
-%\input{content/veros}
-
 
 \input{content/forcings}
 
@@ -77,16 +74,57 @@ sorting=none
 
 \begin{multicols}{2}
 \subsection{Creating Bathymetries}
+\input{content/bathymetries}
+\end{multicols}
+%example full width overturning
 
-(Section on how I created the geometries for veros)
-$90/100$ done
-%\input{content/bathymetries}
+\begin{figure}[H]
+\begin{subfigure}{.5\textwidth}
+	\includegraphics[width=0.9\linewidth]{bathymetry/baath_65.png}
+%	\caption{Beginning of the Paleocene}
+	\label{fig:paleo_begin}
+\end{subfigure}
+\begin{subfigure}{.5\textwidth}
+	\centering
+	% include first image
+	\includegraphics[width=0.9\linewidth]{bathymetry/baath_50.png}
+%	\caption{Beginning of the Eocene}
+	\label{fig:paleo_end}
+\end{subfigure}
+\begin{subfigure}{.5\textwidth}
+	\centering
+	% include first image
+	\includegraphics[width=0.9\linewidth]{bathymetry/baath_30.png}
+%	\caption{Beginning of the Oligocene}
+	\label{fig:paleo_end}
+\end{subfigure}
+\begin{subfigure}{.5\textwidth}
+	\centering
+	% include first image
+	\includegraphics[width=0.9\linewidth]{bathymetry/baath_20.png}
+%	\caption{Beginning of the Miocene}
+	\label{fig:paleo_end}
+\end{subfigure}
+\begin{subfigure}{.5\textwidth}
+	\centering
+	% include first image
+	\includegraphics[width=0.9\linewidth]{bathymetry/baath_0.png}
+%	\caption{Present day}
+	\label{fig:paleo_end}
+\end{subfigure}
+\caption{Paleocene Begin and End}
+\label{fig:paleocene_bath}
 
-\subsection{Model running}
+\end{figure}
 
-(Section on how the model was run (script making sure it is as fast as possible etc.))
-%\input{content/modelsetup}
-$80/100$ done
+\begin{multicols}{2}
+
+
+
+
+\subsection{Veros and Runtime}
+\input{content/veros}
+
 \section{Results}
 \subsection{Stabilizing of the models}
 (Section on when the integration was stopped. How good it is etc.)
