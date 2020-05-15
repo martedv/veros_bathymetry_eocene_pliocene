@@ -36,7 +36,9 @@ if [ -n "$1" ]; then
 	for y in ${years[@]}; do
 		if [ -d "Run${y}" ]; then
 			if test -f "Run${y}/run_${y}ma.current_run"; then
-			    torun=$((torun + $((${1} - $(head -n 1 "Run${y}/run_${y}ma.current_run")))))
+			    if test $(head -n 1 "Run${y}/run_${y}ma.current_run") -lt "$1"; then
+			    	torun=$((torun + $((${1} - $(head -n 1 "Run${y}/run_${y}ma.current_run")))))
+			    fi
 			else
 			    torun=$((torun + $1))
 			fi

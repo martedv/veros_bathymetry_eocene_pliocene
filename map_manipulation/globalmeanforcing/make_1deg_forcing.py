@@ -70,11 +70,14 @@ with h5netcdf.File('idealized_forcing_1deg.nc') as f:
     new_tau = np.array([np.transpose(np.array([new_tau] * 90))]*12)
     
     sst_m = np.array([np.transpose([12.5 + 12.5*np.cos(np.pi * yt/80)]*90)]*12)
-    
-    sss_m = np.mean(np.array([resize_array(f['sss'][:][i]) for i in range(0,12)]),axis=0)
+    sst_m = np.array([resize_array(f['sst'][:][i]) for i in range(0,12)])
+    sss_m = np.array([resize_array(f['sss'][:][i]) for i in range(0,12)])
 
-    new_sss = np.append((np.flip(sss_m[:,0][20:40]) + sss_m[:,0][0:20]) / 2, (np.flip(sss_m[:,0][0:20]) + sss_m[:,0][20:40]) / 2)
-    new_sss = np.array([np.transpose(np.array([new_sss] * 90))]*12)
+    
+    new_sss = np.array([np.append((np.flip(y[20:40,:]) + y[0:20,:])/2,(y[20:40,:] + np.flip(y[0:20,:]))/2,axis=0) for y in sss_m])
+    
+    
+    
 
     with h5netcdf.File('idealized_forcing_4deg.nc', 'w') as oc:
         oc._create_dimension("xt", 90)
