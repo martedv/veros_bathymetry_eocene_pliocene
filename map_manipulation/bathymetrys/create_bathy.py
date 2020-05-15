@@ -23,7 +23,9 @@ def resize_bathy(file):
 
         oceanfloor = Image.fromarray(topo_z)
         oceanfloor = oceanfloor.crop((0, 20, 720, 340))
-        oceanfloor_resize = np.array(oceanfloor.resize((90, 40), resample=3))
+        oceanfloor = oceanfloor.resize((90, 40), resample=1)
+        
+        oceanfloor_resize = np.array(oceanfloor)
 
 
         return oceanfloor_resize
@@ -32,7 +34,7 @@ with h5netcdf.File('simplified_baths_old.nc', 'r') as f:
     xt = f['xt'][:]
     yt = f['yt'][:]
 
-with h5netcdf.File('manual_baths_4deg_test.nc', 'w') as oc:
+with h5netcdf.File('manual_baths_4deg_final.nc', 'w') as oc:
     oc._create_dimension("xt", 90)
     oc._create_dimension("yt", 40)
     oc._create_dimension("Time", 14)
@@ -55,15 +57,31 @@ with h5netcdf.File('manual_baths_4deg_test.nc', 'w') as oc:
         arr[arr > 155] = 255
         arr[arr <= 155] = 0
 
+        
+        
+
         mask = arr > 10
         #mask[0:1] = True
         #mask[-1::] = True
         
         z_data = np.flip(resize_bathy('Originals/TopoBathyc{}.nc'.format(t)),0)
-        z_data[z_data >= 0] = 0
+        z_data[z_data >= -176] = -176.
+
+        if os.path.exists('deep_water/mask{}.jpg'.format(t)):
+            with Image.open('deep_water/mask{}.jpg'.format(t)) as i:
+                deepw = np.copy(np.asarray(i)) > 155
+                z_data[deepw] = -5500
+
+
+        z_data[mask] = 0.
+
+        
 
         islands = np.zeros(mask.shape)
         islands[mask] = 1
+        
+        
+        
 
         allislands= allislands + \
             [np.flip(islands,0)]

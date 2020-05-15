@@ -105,7 +105,7 @@ class GlobalFourDegreeSetup(VerosSetup):
 
     @veros_method
     def _read_bath(self, vs, var):
-        with h5netcdf.File('manual_baths_4deg_test.nc', 'r') as infile:
+        with h5netcdf.File('manual_baths_4deg_final.nc', 'r') as infile:
             var_obj = infile.variables[var]
             return infile[var][:]
 

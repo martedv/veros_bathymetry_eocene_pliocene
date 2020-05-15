@@ -15,15 +15,14 @@ import matplotlib.ticker as ticker
 import cartopy.util as cutil
 from scipy.integrate import quad
 rc('text', usetex=True)
-pdf = PdfPages("seamfunction.pdf")
+pdf = PdfPages("streamfunction_May12.pdf")
 dirname = os.path.dirname(__file__)
 
-filesovert = ['Run0/run_0ma.0149.averages.nc',
-        'Run5/run_5ma.0149.averages.nc', 'Run10/run_10ma.0149.averages.nc', 'Run15/run_15ma.0149.averages.nc', 'Run20/run_20ma.0149.averages.nc',
-        'Run25/run_25ma.0149.averages.nc', 'Run30/run_30ma.0149.averages.nc', 'Run35/run_35ma.0149.averages.nc', 'Run40/run_40ma.0149.averages.nc', 
-        'Run45/run_45ma.0149.averages.nc', 'Run50/run_50ma.0149.averages.nc', 'Run55/run_55ma.0149.averages.nc', 'Run60/run_60ma.0149.averages.nc','Run65/run_65ma.0149.averages.nc']
+filesovert = ['Run0/run_0ma.0029.averages.nc',
+        'Run5/run_5ma.0029.averages.nc', 'Run10/run_10ma.0029.averages.nc', 'Run15/run_15ma.0029.averages.nc', 'Run20/run_20ma.0029.averages.nc',
+        'Run25/run_25ma.0029.averages.nc', 'Run30/run_30ma.0029.averages.nc', 'Run35/run_35ma.0029.averages.nc', 'Run40/run_40ma.0029.averages.nc','Run45/run_45ma.0029.averages.nc',  'Run50/run_50ma.0029.averages.nc', 'Run55/run_55ma.0029.averages.nc', 'Run60/run_60ma.0029.averages.nc', 'Run65/run_65ma.0029.averages.nc']
 
-overt = [xr.open_dataset(dirname + '../actual_runs/runs_4_degree_final/' + filename) for filename in filesovert]
+overt = [xr.open_dataset(dirname + '../actual_runs/runs_4_degree_final_forcing/' + filename) for filename in filesovert]
 
 
 

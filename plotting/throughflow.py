@@ -31,10 +31,6 @@ def calctf(time, long, minlat, maxlat):
         rad0 = lat0*torad
         rad1 = lat1*torad
 
-        # integrate from lat0 to lat1 (in radians)
-
-        # integrate from r0 to r1 *r
-
         return quad(lambda r: r*(rad0 - rad1), z0, z1)
 
     zonarr = zonalu[:,minlat:maxlat,long]
@@ -92,26 +88,35 @@ values = [
     [0,('x',77, 11, 20),0, ('x',  30, 21,24), ('x',50,20,30)], # 65 Ma
 ]
 
-with xr.open_dataset('manual_baths_4deg_test.nc') as f:
-    year = 13
-    bath= np.array(f['mask'][:])[year]
-    mask = np.array(bath > 0)
-    def showBathycells(time, long, minlat,maxlat):
-        bath[ minlat:maxlat, long] = 5
-    def showBathycells_Y(time, lat, minlong,maxlong):
-        bath[ lat,  minlong:maxlong] = 5
+throughflows = np.zeros((14,5))
 
-    for t in values[year]:
+for year in values:
+    for val in year:
+        if isinstance(val, int):
+            continue
+        if val[0] == 'x':
+            calctf
+            
+# with xr.open_dataset('manual_baths_4deg_test.nc') as f:
+#     year = 13
+#     bath= np.array(f['mask'][:])[year]
+#     mask = np.array(bath > 0)
+#     def showBathycells(time, long, minlat,maxlat):
+#         bath[ minlat:maxlat, long] = 5
+#     def showBathycells_Y(time, lat, minlong,maxlong):
+#         bath[ lat,  minlong:maxlong] = 5
+
+#     for t in values[year]:
         
-        if type(t) is tuple:
-            if t[0] == 'y':
-                showBathycells_Y(year,t[1],t[2],t[3])
-            else:
-                showBathycells(year,t[1],t[2],t[3])
+#         if type(t) is tuple:
+#             if t[0] == 'y':
+#                 showBathycells_Y(year,t[1],t[2],t[3])
+#             else:
+#                 showBathycells(year,t[1],t[2],t[3])
 
-    bath[mask] = 1
-    plt.pcolor(bath)
-    plt.show()
+#     bath[mask] = 1
+#     plt.pcolor(bath)
+#     plt.show()
 
 
 

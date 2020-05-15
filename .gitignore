@@ -3,3 +3,9 @@ TopoBathyc??.nc
 actual_runs/**/*.current_run
 actual_runs/**/*.nc
 actual_runs/**/*.h5
+actual_runs/**/*.zip
+actual_runs/*.zip
+plotting/*.png
+plotting/*.jpg
+plotting/*.pdf
+plotting/**/notebooks/Data/*.nc
