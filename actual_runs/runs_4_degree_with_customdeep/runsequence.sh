@@ -21,7 +21,7 @@ function show_time () {
     else
         ((sec=num))
     fi
-    echo "Expected time left: $day"d "$hour"h "$min"m "$sec"s
+    echo "THIS INTEGRATION TOOK: $day"d "$hour"h "$min"m "$sec"s
 }
 years=(0 5 10 15 20 25 30 35 40 45 50 55 60 65)
  
@@ -49,7 +49,11 @@ if [ -n "$1" ]; then
 	
 	eachrun=$(seq $1 $3 $2)
 	for r in ${eachrun[@]}; do
+	  SECONDS=0
+	  echo "Running until $r"
 	  sh run_all.sh $r
+	  duration=$SECONDS
+	  show_time $(($duration*torun))
 	done
 else
   echo "Supply length!"
