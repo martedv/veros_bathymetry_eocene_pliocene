@@ -70,6 +70,7 @@ with h5netcdf.File('idealized_forcing_1deg.nc') as f:
     new_tau = np.array([np.transpose(np.array([new_tau] * 90))]*12)
     
     sst_m = np.array([np.transpose([12.5 + 12.5*np.cos(np.pi * yt/80)]*90)]*12)
+    
     sst_m = np.array([resize_array(f['sst'][:][i]) for i in range(0,12)])
     sss_m = np.array([resize_array(f['sss'][:][i]) for i in range(0,12)])
 
