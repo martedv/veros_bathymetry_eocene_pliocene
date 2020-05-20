@@ -16,8 +16,8 @@ import cartopy.util as cutil
 from scipy.integrate import quad
 rc('text', usetex=True)
 
-years = [35, 45]
-rundir = '../actual_runs/runs_4_degree_final_forcing/'
+years = [0]
+rundir = '../actual_runs/runs_4_degree_last/'
 for year in years:
     #check if a run is done
     if os.path.exists(rundir + 'Run%i/run_%ima.current_run' % (year,year)):
@@ -28,10 +28,10 @@ for year in years:
             #open averages
             #get temprature
             # mean of surface
-            with xr.open_dataset(rundir + 'Run%i/run_%ima.%04d.averages.nc'% (year,year,i)) as ds:
-                temps = np.array(ds['temp'].values)[0,:,:,:]
+            with xr.open_dataset(rundir + 'Run%i/run_%ima.%04d.overturning.nc'% (year,year,i)) as ds:
+                temps = np.max(ds['vsf_depth'].values[0,0:10,12])
                 meantempratures.append(np.nanmean(temps))
-        plt.plot(np.gradient(meantempratures), label=np.gradient(meantempratures)[-1])
+        plt.plot(meantempratures, label=(np.gradient(meantempratures)[-1])/1e6)
 plt.legend()
 plt.show()
         
