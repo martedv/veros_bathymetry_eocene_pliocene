@@ -53,7 +53,7 @@ if [ -n "$1" ]; then
 	  echo "Running until $r"
 	  sh run_all.sh $r
 	  duration=$SECONDS
-	  show_time $(($duration*torun))
+	  show_time $(($duration))
 	done
 else
   echo "Supply length!"

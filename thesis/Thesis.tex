@@ -89,58 +89,57 @@ sorting=none
 %\end{subfigure}
 
 \caption{Idealized forcing profiles}
-
+\label{fig:idealized_forc}
 \end{figure}
 
 \begin{multicols}{2}
-\subsection{Creating Bathymetries}
+
 \input{content/bathymetries}
-\end{multicols}
-%example full width overturning
-\begin{figure}[H]
-	\includegraphics[width=\linewidth]{passages.png}
-	\caption{Passages}
-	\label{fig:passages}
-\end{figure}
-\begin{figure}[H]
-	\includegraphics[width=\linewidth]{bathymetries_1_crop.pdf}
-\end{figure}
-\begin{figure}[H]
-	\includegraphics[width=\linewidth]{bathymetries_2_crop.pdf}
-	\caption{Bathymetries for each of the time steps studied in this model.}
-	\label{fig:bathys}
-\end{figure}
-
-\begin{multicols}{2}
 
 
 
 
 
 \section{Results}
-\subsection{Stabilizing of the models}
-(Section on when the integration was stopped. How good it is etc.)
-$60/100$ done
 
+\input{content/quality}
 
-\subsection{Passage throughflow}
-\input{content/throughflow}
 \end{multicols}
-%example full width overturning
+%example full width overturnings
 
 \begin{figure}[H]
-\includegraphics[width=\linewidth]{flowfield_1_crop.pdf}
-\end{figure}
-\begin{figure}[H]
-\includegraphics[width=\linewidth]{flowfield_2_crop.pdf}
-\caption{Flow field}
-\label{fig:bathys}
+\begin{subfigure}{1\textwidth}
+	\includegraphics[width=\linewidth]{compare/bsf_idealized}
+	\caption{Present day model with idealized forcings}
+\end{subfigure}
+\begin{subfigure}{1\textwidth}
+	\includegraphics[width=\linewidth]{compare/bsf_good_forcing}
+	\caption{Present day model with idealized forcings}
+\end{subfigure}
+\caption{Figures comparing the Barotropic stream function (contours) and temperature at 245m depth of \textbf{a)} an idealized model and \textbf{b)} a model with realistic forcings}
+\label{fig:bsf_compared}
 \end{figure}
 
 \begin{multicols}{2}
-\subsection{Barotropic Stream function}
-\label{sec:BSF}
+
 \input{content/BSF}
+
+\input{content/throughflow}
+
+\end{multicols}
+%example full width overturnings
+
+\begin{figure}[H]
+\includegraphics[width=\linewidth]{flowfield_1.pdf}
+\end{figure}
+\begin{figure}[H]
+\includegraphics[width=\linewidth]{flowfield_2.pdf}
+\caption{Flow field}
+\label{fig:flowfield}
+\end{figure}
+
+\begin{multicols}{2}
+
 \end{multicols}
 %example full width overturning
 \begin{figure}[H]

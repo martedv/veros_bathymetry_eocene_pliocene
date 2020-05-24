@@ -70,7 +70,7 @@ with h5netcdf.File('manual_baths_4deg_final.nc', 'w') as oc:
         if os.path.exists('deep_water/mask{}.jpg'.format(t)):
             with Image.open('deep_water/mask{}.jpg'.format(t)) as i:
                 deepw = np.copy(np.asarray(i)) > 155
-                z_data[deepw] = -5500
+                z_data[deepw] = z_data[deepw] - 2000
 
 
         z_data[mask] = 0.
