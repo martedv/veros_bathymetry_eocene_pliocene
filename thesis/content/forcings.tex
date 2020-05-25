@@ -16,6 +16,11 @@ Furthermore the model uses restoring boundary conditions. Restoring the boundary
  
  There were several methods that are explored when it comes to creating these idealized forcings. In the \cite{Mulder2017Jul} paper an analytic forcing profile was used for wind flux, SST and SSS. This however fails to capture seasonal changes in each of the forcings due to the earths axial tilt. Something that can bring about a huge effect on the strength of the MOC. To combat this change a compromise is proposed. The SSS, SST and heat flux profiles are taken as zonal means for each month in the earths rotation. While the Zonal wind stress is set to the simple profile proposed by \cite{bryan1987parameter}. The analytic profile used in the paper is not specified specifically. but it can quite easily be deduced from the profile's plot. The choice of this analytic profile was made over a zonally averaged and equatorial averaged forcing $\mu(\tau_x)$. These were both tested on the present day configuration to see which of these forcings most accurately captures the present day MOC. In \fref{sec:MOCSTREAM} a comparison with the present day MOC and BSF is made. 
  
+ \subsubsection{Forcing errors}
+ (TODO)
+ \subsubsection{Initial conditions}
+ (TODO)
+ 
  \subsubsection{MOC stream function} \label{sec:MOCSTREAM}
  
  The global Meridional Overturning Circulation $\Psi_{MOC}$ is defined as the zonally integrated meridional volume transport of water in the worlds oceans. It can be written down as:
@@ -53,3 +58,4 @@ Q = \int \int_A \vec{u} \cdot d\vec{A}
 
 For each passage a suitable location is chosen such that there are no boundaries next to the passageways, this is done for each time step. Then the $u$ component of the flow is used to compute the total flow. This method is the same for each of the passages and thus we can study the effect of changes in bathymetry to on the relative strength of the flow. However, it should be noted that these values may not represent real physical values. As the passages in a $4^{\circ}$ model are often only a few grid cells wide. Resulting in discrepancies in the calculation of the throughflow due to boundary conditions. 
 There is however a more accurate way to calculate these throughflows. This can be done using the output of the Barotropic stream function discussed in \fref{sec:BSF_theory}. This also gives us a measure of (purely zonal) throughflow in each grid cell. It is however difficult to get accurate values from this in Veros because the current version does not display the boundary values for the stream function.
+
