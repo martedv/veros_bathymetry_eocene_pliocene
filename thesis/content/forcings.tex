@@ -3,21 +3,28 @@
 \subsubsection{Model Domain}
 The domain of the model is bounded by longitudes $\phi_E=-180^{\circ}$ and $\phi_W=-180^{\circ}$ and latitudes $\theta_N=80^{\circ}$ and $\theta_S=-80^{\circ}$ with periodic boundary conditions in the zonal direction.
 Furthermore the model uses restoring boundary conditions. Restoring the boundary at the surface of the oceanic basin to be a value based of a forcing field for Sea Surface Temperature (SST), Sea Surface Salinity (SSS), wind stresses ($\tau$) and heat flux.
- The depth profile has 15 layers with grid stretching (\fref{fig:gridstrech}). There are $90 \times 40$ grid points to make a $4^{\circ} \times 4^{\circ}$ resolution model.
+ The depth profile has 15 layers with grid stretching (\cref{fig:gridstrech}). The grid stretching relation is such that surface layers are much shallower than deep water layers. There are $90 \times 40$ grid points to make a $4^{\circ} \times 4^{\circ}$ resolution model.
  
  \begin{figure}[H]
  	\includegraphics[width=\linewidth]{grid_stretching.png}
- 	\caption{Grid stretching relation used}
+ 	\caption{Figure of the grid stretching relation used.}
  	\label{fig:gridstrech}
  \end{figure}
 
 \subsubsection{Surface Forcings}
- Choosing the correct forcing for the ocean is very important. It is known that in general circulation models the MOC is highly sensitive too even small changes in surface forcings (\cite{Milliff1999May}). Attempts at making these forcings highly idealized have often been made in the past with varying rates of success. In this paper we will however use idealized forcings. Noting the fact that, this will probably induce the aforementioned errors in deep ocean circulations.
+ Choosing the correct forcing for the ocean is very important. It is known that in general circulation models the MOC is highly sensitive too even small changes in surface forcings (\cite{Milliff1999May}). Attempts at making these forcings highly idealized have often been made in the past with varying rates of success(\cite{bryan1987parameter}; \cite{Mulder2017Jul}). We note the fact that, using idealized forcings will probably induce the errors, especially in the shape of the thermohaline circulations.
  
- There were several methods that are explored when it comes to creating these idealized forcings. In the \cite{Mulder2017Jul} paper an analytic forcing profile was used for wind flux, SST and SSS. This however fails to capture seasonal changes in each of the forcings due to the earths axial tilt. Something that can bring about a huge effect on the strength of the MOC. To combat this change a compromise is proposed. The SSS, SST and heat flux profiles are taken as zonal means for each month in the earths rotation. While the Zonal wind stress is set to the simple profile proposed by \cite{bryan1987parameter}. The analytic wind stress profile used in the paper is not specified specifically. However, it can quite easily be deduced from the profile's plot. The choice of this analytic profile was made over a zonally averaged and equatorial averaged forcing $\mu(\tau_x)$. These were both tested on the present day configuration to see which of these forcings most accurately captures the present day MOC. In \fref{sec:MOCSTREAM} a comparison with the present day MOC and BSF is made. 
+ There were several methods that are explored when it comes to creating these idealized forcings. In the \cite{Mulder2017Jul} paper an analytic forcing profile was used for wind flux, SST and SSS. Veros is however a seasonally forced model. Using these simplified forcings would thus fail to capture seasonal changes especially in the SST. There have been studies suggesting that these seasonal forcings can have large effects on the strength of the meridional overturning circulation (\cite{schmittner2001seasonally}). Here we propose to take the SSS, SST and heat flux profiles as as zonal means for each month in the earths rotation. While the Zonal wind stress is set to the simple profile proposed by \cite{bryan1987parameter}. The choice of this analytic profile was made over a zonally averaged and equatorial averaged forcing $\mu(\tau_x)$. These were both tested on the present day configuration to see which of these forcings most accurately captures the present day MOC. We find that the Zonally averaged wind stress is very weak in the subpolar regions and fails to force the north Atlantic deep water formation discussed in \cref{sec:MOCSTREAM}.
  
- \subsubsection{Forcing errors}
- (TODO)
+ \subsubsection{Forcing errors} \label{sec:forc_err}
+The forcings we use here have large errors compared to reality. This can be seen if we compare the original realistic forcings to the zonal mean of these forcings. In \cref{fig:sss_sst_errors} there is a particularly large discrepancy in the Atlantic. Which has a much higher salinity in reality than in our forcing. This may have large implications on the thermohaline circulation. It is furthermore noted that the northern Atlantic ocean is much warmer in reality than in our model. Again possibly having an effect on the thermohaline circulation.
+
+\begin{figure}[H]
+	\includegraphics[width=\linewidth]{SST_SSS_errors.png}
+	\caption{Figure showing errors in surface forcing. Here positive values are over estimations of realistic forcings. Errors for: \textbf{a)} the SSS difference with contours every 1 psu and \textbf{b)} the SST difference with contours every 1 $^{\circ}C$}
+	\label{fig:sss_sst_errors}
+\end{figure}
+
  \subsubsection{Initial conditions}
  (TODO)
  
@@ -45,7 +52,7 @@ $$
 \int_{-D}^{0}v(x,y,z) dz = \frac{1}{\beta \rho_{ref}}\vec{\hat{z}}\cdot \nabla \times \tau
 $$
 
- first proposed by \cite{sverdrup1947wind} we can look at a schematic diagram of the barotropic stream function based on the prevailing zonal winds. \fref{fig:schem_currents} shows a schematic of this relation. It is easily visible how the prevailing zonal winds relate to the wind stress forcing seen in \fref{fig:idealized_forc}. The calculation of the barotropic streamfunction without easily defined boundaries, is quite a complicated process done by Veros. 
+ first proposed by \cite{sverdrup1947wind} we can look at a schematic diagram of the barotropic stream function based on the prevailing zonal winds. \prettyref{fig:schem_currents} shows a schematic of this relation. It is easily visible how the prevailing zonal winds relate to the wind stress forcing seen in \prettyref{fig:idealized_forc}. The calculation of the barotropic streamfunction without easily defined boundaries, is quite a complicated process done by Veros. 
  
  
  (probably will add a discussion on this)
@@ -56,12 +63,12 @@ $$
  	\label{fig:schem_currents}
  \end{figure}
 \subsubsection{Passage throughflow}\label{sec:throughflowp}
-For each of the passages mentioned in \fref{sec:bathys} it is interesting to talk about the total volume transport through each of the passages discussed in \fref{sec:bathys}. This is done using a simple integration to calculate the volumetric flux through each passage. This volumetric flux, defined as
+For each of the passages mentioned in \prettyref{sec:bathys} it is interesting to talk about the total volume transport through each of the passages discussed in \prettyref{sec:bathys}. This is done using a simple integration to calculate the volumetric flux through each passage. This volumetric flux, defined as
 
 \begin{align}
 Q = \iint_A \vec{u} \cdot d\vec{A}
 \end{align}	
 
 For each passage a suitable location is chosen such that there are no boundaries next to the passageways, this is done for each time step. Then the $u$ component of the flow is used to compute the total flow. This method is the same for each of the passages and thus we can study the effect of changes in bathymetry to on the relative strength of the flow. However, it should be noted that these values may not represent real physical values. As the passages in a $4^{\circ}$ model are often only a few grid cells wide. Resulting in discrepancies in the calculation of the throughflow due to boundary conditions. 
-There is however a more accurate way to calculate these throughflows. This can be done using the output of the Barotropic stream function discussed in \fref{sec:BSF_theory}. This also gives us a measure of (purely zonal) throughflow in each grid cell. It is however difficult to get accurate values from this in Veros because the current version does not display the boundary values for the stream function.
+There is however a more accurate way to calculate these throughflows. This can be done using the output of the Barotropic stream function discussed in \prettyref{sec:BSF_theory}. This also gives us a measure of (purely zonal) throughflow in each grid cell. It is however difficult to get accurate values from this in Veros because the current version does not display the boundary values for the stream function.
 
