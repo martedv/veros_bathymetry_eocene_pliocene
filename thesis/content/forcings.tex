@@ -14,19 +14,61 @@ Furthermore the model uses restoring boundary conditions. Restoring the boundary
 \subsubsection{Surface Forcings}
  Choosing the correct forcing for the ocean is very important. It is known that in general circulation models the MOC is highly sensitive too even small changes in surface forcings (\cite{Milliff1999May}). Attempts at making these forcings highly idealized have often been made in the past with varying rates of success(\cite{bryan1987parameter}; \cite{Mulder2017Jul}). We note the fact that, using idealized forcings will probably induce the errors, especially in the shape of the thermohaline circulations.
  
- There were several methods that are explored when it comes to creating these idealized forcings. In the \cite{Mulder2017Jul} paper an analytic forcing profile was used for wind flux, SST and SSS. Veros is however a seasonally forced model. Using these simplified forcings would thus fail to capture seasonal changes especially in the SST. There have been studies suggesting that these seasonal forcings can have large effects on the strength of the meridional overturning circulation (\cite{schmittner2001seasonally}). Here we propose to take the SSS, SST and heat flux profiles as as zonal means for each month in the earths rotation. While the Zonal wind stress is set to the simple profile proposed by \cite{bryan1987parameter}. The choice of this analytic profile was made over a zonally averaged and equatorial averaged forcing $\mu(\tau_x)$. These were both tested on the present day configuration to see which of these forcings most accurately captures the present day MOC. We find that the Zonally averaged wind stress is very weak in the subpolar regions and fails to force the north Atlantic deep water formation discussed in \cref{sec:MOCSTREAM}.
- 
+ There were several methods that are explored when it comes to creating these idealized forcings. In the \cite{Mulder2017Jul} paper an analytic forcing profile was used for wind flux, SST and SSS (\cref{fig:idealized_forc}). Veros is however a seasonally forced model. Using these simplified forcings would thus fail to capture seasonal changes especially in the SST. There have been studies suggesting that these seasonal forcings can have large effects on the strength of the meridional overturning circulation (\cite{schmittner2001seasonally}). Here we propose to take the SSS, SST and heat flux profiles as as zonal means for each month in the earths rotation. While the Zonal wind stress is set to the simple profile proposed by \cite{bryan1987parameter}. The choice of this analytic profile was made over a zonally averaged and equatorial averaged forcing $\mu(\tau_x)$. These were both tested on the present day configuration to see which of these forcings most accurately captures the present day MOC. We find that the Zonally averaged wind stress is very weak in the subpolar regions and fails to force the north Atlantic deep water formation discussed in \cref{sec:MOCSTREAM}.
+\end{multicols}
+%example full width overturning
+
+\begin{figure}[H]
+\begin{subfigure}{.5\textwidth}
+	\includegraphics[width=\linewidth]{q_net_profile.png}
+	\caption{Net Heat flux}
+	\label{fig:qnet}
+\end{subfigure}
+\begin{subfigure}{.5\textwidth}
+	\includegraphics[width=\linewidth]{sst_profile.png}
+	\caption{SST profile}
+	\label{fig:sst_profile}
+\end{subfigure}
+\begin{subfigure}{.5\textwidth}
+	\includegraphics[width=\linewidth]{sss_profile.png}
+	\caption{SSS profile}
+	\label{fig:sss_profile}
+\end{subfigure}
+\begin{subfigure}{.5\textwidth}
+	\includegraphics[width=\linewidth]{windstress_models.png}
+	\caption{$\tau_x$ profile}
+	\label{fig:tau_profile}
+\end{subfigure}
+%\begin{subfigure}{.5\textwidth}
+%	\centering
+%	% include first image
+%	\includegraphics[width=0.9\linewidth]{tau_x_profile.png}
+%	\caption{Zonal wind stress ($\tau_x$) profile}
+%	\label{fig:tau_X}
+%\end{subfigure}
+
+\caption{Idealized forcing profiles}
+\label{fig:idealized_forc}
+\end{figure}
+
+\begin{multicols}{2}
  \subsubsection{Forcing errors} \label{sec:forc_err}
 The forcings we use here have large errors compared to reality. This can be seen if we compare the original realistic forcings to the zonal mean of these forcings. In \cref{fig:sss_sst_errors} there is a particularly large discrepancy in the Atlantic. Which has a much higher salinity in reality than in our forcing. This may have large implications on the thermohaline circulation. It is furthermore noted that the northern Atlantic ocean is much warmer in reality than in our model. Again possibly having an effect on the thermohaline circulation.
-
+\end{multicols}
 \begin{figure}[H]
 	\includegraphics[width=\linewidth]{SST_SSS_errors.png}
 	\caption{Figure showing errors in surface forcing. Here positive values are over estimations of realistic forcings. Errors for: \textbf{a)} the SSS difference with contours every 1 psu and \textbf{b)} the SST difference with contours every 1 $^{\circ}C$}
 	\label{fig:sss_sst_errors}
 \end{figure}
-
+\begin{multicols}{2}
  \subsubsection{Initial conditions}
- (TODO)
+The model is started with an initial temperature and salinity profile that is, like the forcings taken from observational data. A zonal mean was taken for the profiles. This results in the profile seen for the situation around the equator in \cref{fig:salt_temp_prf}.
+
+\begin{figure}[H]
+	\includegraphics[width=\linewidth]{salt_temp_prof.png}
+	\caption{Figure showing the temperature and salinity profiles at $2^{\circ} N$. Black squares indicate the Temperature profile and red circles indicate the salinity profile.}
+	\label{fig:salt_temp_prf}
+\end{figure}
  
  \subsubsection{MOC stream function} \label{sec:MOCSTREAM}
  
@@ -55,7 +97,7 @@ $$
  first proposed by \cite{sverdrup1947wind} we can look at a schematic diagram of the barotropic stream function based on the prevailing zonal winds. \prettyref{fig:schem_currents} shows a schematic of this relation. It is easily visible how the prevailing zonal winds relate to the wind stress forcing seen in \prettyref{fig:idealized_forc}. The calculation of the barotropic streamfunction without easily defined boundaries, is quite a complicated process done by Veros. 
  
  
- (probably will add a discussion on this)
+ (probably will add a discussion on the precess veros uses but i have to read up on it)
  
   \begin{figure}[H]
  	\includegraphics[width=\linewidth]{schematic_marshall_plumb.png}
