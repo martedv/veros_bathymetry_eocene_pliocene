@@ -16,6 +16,8 @@
 \usepackage{amsmath}
 \usepackage{subcaption}
 \usepackage{cleveref}
+
+\usepackage{todonotes}
 \usepackage[
 backend=bibtex,
 citestyle=authoryear,
@@ -81,7 +83,7 @@ We investigate the effect of changing geometries in a simple ocean general circu
 \end{figure}
 \begin{figure}[H]
 \includegraphics[width=\linewidth]{flowfield_2.pdf}
-\caption{Flow field}
+\caption{Flow field for each time step, showing the velocity of the vertical column as vectors. The values are in $m s^{-1}$}
 \label{fig:flowfield}
 \end{figure}
 
@@ -147,8 +149,16 @@ $0/100$ done
 
 \printbibliography
 
-\end{multicols}
 
+
+
+\end{multicols}
+\todo[inline, color=green!40]{Add appendices
+Sea surface temperature
+Sea surface salinity
+
+
+}
 
 
 \end{document}
