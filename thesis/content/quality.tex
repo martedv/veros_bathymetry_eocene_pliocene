@@ -1,28 +1,34 @@
 \subsection{Model runs}
 The model was run for 500 years for each of the 14 time steps. Accounting for a total of 7000 years of model time. The timings are shown in \cref{table:masteps}. We see that the total integration time is quite long but in general manageable. We note that it would be possible to significantly speed up our work by using many nodes in parallel instead of a single node in succession.
+\begin{figure}[H]
+	\includegraphics[width=\linewidth]{drift_integration.png}
+	\caption{Total globally averaged temperature ($^{\circ}C$) for presentday (blue), 20Ma (orange), 40Ma (green) and 60Ma (red). From 200 to 500 years integration.}
+	\label{fig:avtempgrph}
+\end{figure}
 \begin{table}[H]
 	\centering
-	\begin{tabular}{lll}
-Year & $\Delta t$ & $T$ \\
-present day & 1'01" & 8:30 \\
-5Ma& 1'01" & 8:30 \\
-10Ma & 1'01" & 8:30 \\
-15Ma & 1'02" & 8:40 \\
-20Ma & 1'01" & 8:30 \\
-25Ma & 1'02" & 8:40 \\
-30Ma & 1'03" & 8:30 \\
-35Ma & 1'00" & 8:30 \\
-40Ma & 1'02" & 8:40 \\
-45Ma & 1'00" & 8:20 \\
-50Ma & 1'00" & 8:20 \\
-55Ma & 1'01" & 8:30 \\
-60Ma & 1'02" & 8:40 \\
-65Ma & 1'03" & 8:50 \\
+	\begin{tabular}{lllll}
+Year & $\Delta time$ & $time$ & $\Delta T$& $\Delta S$\\
+present day & 1'01" & 8:30& -2.1978& -1.8629\\
+5Ma& 1'01" & 8:30& -2.8292& -2.5038 \\
+10Ma & 1'01" & 8:30& -2.7764& -1.8219\\
+15Ma & 1'02" & 8:40& -6.1497& -2.6299\\
+20Ma & 1'01" & 8:30&  -5.3202& -1.9109\\
+25Ma & 1'02" & 8:40& -5.3201& -1.9341\\
+30Ma & 1'03" & 8:30& -3.0994& -1.5755\\
+35Ma & 1'00" & 8:30& -0.3163&-1.6289\\
+40Ma & 1'02" & 8:40& -5.1253& -1.7728\\
+45Ma & 1'00" & 8:20& -5.1196& -1.7066\\
+50Ma & 1'00" & 8:20& -4.9925& -1.6592\\
+55Ma & 1'01" & 8:30& -4.9158& -1.6586\\
+60Ma & 1'02" & 8:40& -5.5853& -1.6902\\
+65Ma & 1'03" & 8:50& -6.3302& -1.8980\\
 	\end{tabular}
-\caption{Table showing timings for each of the runs. $\Delta t$ is the time per integration in minutes'seconds" and $T$ is the time in hours for each run.}
+
+\caption{$\Delta time$ is the time per integration in minutes'seconds". $time$ is the time in hours for each run. $\Delta T$ is the average temperature gradient for the last 10 time steps in $10^{-4} C$ per year. $\Delta S$ is the average salinity gradient for the last 10 time steps in $10^{-4} psu$ per year.}
 \label{table:masteps}
 \end{table}
-\todo[inline, color=green!40]{Here I want to add a piece on how stable the model is (temprature drift, salinity drift etc.)}
+
 
 \subsection{Control setup}
 
@@ -47,10 +53,9 @@ Too look at the quality of the barotropic stream function we compare the barotro
 
 \begin{multicols}{2}
 
-\subsubsection{Quality of the MOC}
+\subsubsection{Quality of the MOC} \label{sec:mocQual}
 Next we look at the MOC stream functions and compare them between the two models. Here we must note the difference in geometry between the two models. This is due to the fact that we use an interpolated version in the simplified forcings case. That is different from the geometry used by Veros. In \cref{fig:moc_compared} we see the MOC stream function for the simplified and realistic models. Here the real problem of using simplified forcings is visible. The overturning circulation with the simplified forcings is extremely weak compared to the  overturning circulation with simplified forcings. We note that several key features are not captured by both models.
-
-\todo[inline, color=green!40]{TODO: a piece on what is missing from the MOC. Mainly features discussed in the methods piece about the MOC}
+ The first, most striking is the complete absence of the AABW cell. This feature seems to not be captured at all in the model. This might be because of the extremely simplified method of simulating sea ice in the model. Sea ice extend in the arctic is known to be central to the formation of the AABW (\cite{Hansen2016Mar}). The NADW formation is captured both models. It is however much weaker in the case of simplified forcings. The main diffirence being the strength of the IDW/PDW cell. Which is only 4 $Sv$ in the simplified model. While the realistic forcing model does a better job at around $15 Sv$. We note the weaker overturning as being a generic feature of our model in the chapter discussing the overturning circulation for each time step.
 
 \end{multicols}
 \begin{figure}[H]
@@ -61,10 +66,3 @@ Next we look at the MOC stream functions and compare them between the two models
 \end{figure}
 
 \begin{multicols}{2}
-\subsubsection{Estimation of error}
-\todo[inline, color=green!40]{TODO something on measuring the error introduced by the model. Probably by making a plot of the diffirence in MOC and the diffirence in BSF. And then extrapolate an error in Sv. Do not know if this is effective.}
-
-\begin{figure}[H]
-	\includegraphics[width=\linewidth]{maxval_MOC.png}
-	\caption{Maximum value of the MOC stream function in the northern hemisphere. Taken in the area $30^{\circ} - 80^{\circ}N$. Below $500m$.}
-\end{figure}

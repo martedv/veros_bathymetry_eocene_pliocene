@@ -6,7 +6,7 @@
 \usepackage{graphicx}
 \usepackage{multicol}
 \usepackage{prettyref}
-
+\usepackage{textcomp}
 \usepackage{hyperref}
 
 \usepackage[headings]{fullpage}
@@ -46,10 +46,11 @@ sorting=none
 \maketitle
 \noindent\rule{\textwidth}{1pt}
 \begin{abstract}
-We investigate the effect of changing geometries in a simple ocean general circulation model. Using highly idealized forcings we compare the the situations for every 5 Milion year (Ma) time step from 65Ma to the present day situation. The present day simulation was used as a control. The model result shows a reversal of the flow through the panama gateway in the early Miocene coinciding with the closure of the Thetys seaway. We also observe a system that is extemely senstive to the position of the Indian Continent in the Paleocene. Furthermore we observe large differences in the thermohaline circulations in comparison to the present day situation. Furthermore, both northern and southern deep water formations are ubserved until the onset of the Atlantic circumpolar current.
+We investigate the effect of changing geometries in a simple ocean general circulation model. Using highly idealized forcings we compare the the situations for every 5 Milion year (Ma) time step from 65Ma to the present day situation. The present day simulation was used as a control. The model result shows a reversal of the flow through the panama gateway in the early Miocene coinciding with the closure of the Thetys seaway. We also observe a system that is extemely senstive to the position of the Indian Continent in the Paleocene. Furthermore we observe large differences in the thermohaline circulations in comparison to the present day situation.
 \end{abstract}
 \noindent\rule{\textwidth}{1pt}
 \begin{multicols}{2}
+\todo[inline, color=green!40]{The abstract still needs some work as my conclusions are still so weak.  Formatting the document is also not finalized. Some half empty pages are still present. But dealing with formatting is not efficient when the paper is not in its final state. }
 \section{Introduction}
 \input{content/introduction}
 
@@ -64,7 +65,7 @@ We investigate the effect of changing geometries in a simple ocean general circu
 
 
 \input{content/bathymetries}
-
+ 
 
 
 
@@ -103,7 +104,7 @@ We investigate the effect of changing geometries in a simple ocean general circu
 \end{figure}
 
 \begin{multicols}{2}
-\subsection{MOC Stream function}
+
 \input{content/MOC}
 
 \end{multicols}
@@ -128,7 +129,8 @@ We investigate the effect of changing geometries in a simple ocean general circu
 \input{content/summary}
 \section{Discussion}
 \input{content/discussion}
-$0/100$ done
+\section{Acknowledgments}
+This paper would not have been possible without the extensive support of Dr. Anna von der Heydt, who provided valuable input on every single one of the many hurdles that had to be succumbed. I would also like to thank Dr. Michiel Baatsen for providing the bathymetry datasets used in this paper, Prof. Dr. Markus Jochum for providing valuable insight into Veros and Laurits Andreasen for helping with many of our questions and attending our virtual meetings.
 
 
 %\section{Test images}
@@ -153,12 +155,44 @@ $0/100$ done
 
 
 \end{multicols}
-\todo[inline, color=green!40]{Add appendices
-Sea surface temperature
-Sea surface salinity
+\appendix
+\begin{figure}[ht]
+		\centering
+	\includegraphics[width=0.7\linewidth]{full_sss.pdf}
+	\caption{Salinity at 245m depth for each time step.}
+	\label{fig:sss_total}
+\end{figure}
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=0.7\linewidth]{full_sst.pdf}
+	\caption{Temperature at 245m depth for each time step.}
+	\label{fig:sst_total}
+\end{figure}
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=0.7\linewidth]{full_sst_depth.pdf}
+	\caption{Latitude depth profile of the zonal mean Temperature}
+	\label{fig:sst_zmean_total}
+\end{figure}
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=0.7\linewidth]{full_pacific_sst.pdf}
+	\caption{Latitude depth profile of the Temperature in the Pacific ($178^{\circ} W$)}
+	\label{fig:pacsst_total}
+\end{figure}
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=0.7\linewidth]{full_atlantic_sst.pdf}
+	\caption{Latitude depth profile of the Temperature in the Atlantic ($178^{\circ} W$)}
+	\label{fig:atlsst_total}
+\end{figure}
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=0.7\linewidth]{full_sss_depth.pdf}
+	\caption{Latitude depth profile of the zonal mean Salinity}
+	\label{fig:atlsst_total}
+\end{figure}
 
-
-}
 
 
 \end{document}
