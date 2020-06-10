@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-years=(0 5 10 15 20 25 30 35 40 45 50 55 60 65)
-#   
+years=( 5 )
+#  0 5 10 15 20 25 30 35 40 45 50 55 60 65
 ran=0
 
 function show_time () {
@@ -60,7 +60,7 @@ if [ -n "$1" ]; then
         		   echo "Running ${y}Ma year: ${i}"
         		   SECONDS=0 
 			   veros resubmit -i run_${y}ma -n $i -l 31104000 \
-			    -c "mpirun -n 4 python3 4deg_basic_${y}.py -n 2 2" &> /dev/null
+			    -c "mpirun -n 4 python3 4deg_basic_${y}.py -n 2 2"
           		   duration=$SECONDS
           		   torun=$((torun-1))
 			   echo "$(($duration / 60)):$(($duration % 60))"
