@@ -69,7 +69,7 @@ We investigate the effect of changing geometries in a simple ocean general circu
 
 
 
-\newpage
+
 \section{Results}
 
 \input{content/quality}
@@ -84,7 +84,7 @@ We investigate the effect of changing geometries in a simple ocean general circu
 \end{figure}
 \begin{figure}[H]
 \includegraphics[width=\linewidth]{flowfield_2.pdf}
-\caption{Flow field for each time step, showing the velocity of the vertical column as vectors. The values are in $m s^{-1}$}
+\caption{Flow field for each time step as a weighted mean showing the average velocity of each vertical water column in $m s^{-1}$. Serves to indicate flow direction and relative strength in the oceanic basins. Also serves as a basis to compare results with the shallow water model in  \cite{omta2003physical}}
 \label{fig:flowfield}
 \end{figure}
 
@@ -95,14 +95,17 @@ We investigate the effect of changing geometries in a simple ocean general circu
 %example full width overturning
 \begin{figure}[H]
 
-\includegraphics[width=1\linewidth]{BSF_1.pdf}
+\includegraphics[width=0.95\linewidth]{BSF_1.pdf}
+\caption{Barotropic Stream Function with contour lines every $5 Sv$ for the period from 65 Ma to 40 Ma. Note that the boundary values of the BSF are shown here but that the drake passage is closed and that there is no flow is propagating through the passage.}
+\label{fig:bsf_total1}
 \end{figure}
 \begin{figure}[H]
-\includegraphics[width=1\linewidth]{BSF_2.pdf}
-\caption{Barotropic Stream Function with contour lines every $5 Sv$}
+\includegraphics[width=0.95\linewidth]{BSF_2.pdf}
+\caption{Barotropic Stream Function with contour lines every $5 Sv$ for the period from 35 Ma to the present day configuration. Note that the boundary values of the BSF are shown here but that the panama passage is closed after 5 Ma and no flow is propagating through the passage.}
 \label{fig:bsf_total}
 \end{figure}
 
+\newpage
 \begin{multicols}{2}
 
 \input{content/MOC}
@@ -111,11 +114,11 @@ We investigate the effect of changing geometries in a simple ocean general circu
 %example full width overturning
 \begin{figure}[H]
 
-\includegraphics[width=1\linewidth]{MOC_1.pdf}
+\includegraphics[width=0.95\linewidth]{MOC_1.pdf}
 \end{figure}
 \begin{figure}[H]
-\includegraphics[width=1\linewidth]{MOC_2.pdf}
-\caption{Barotropic Stream Function}
+\includegraphics[width=0.95\linewidth]{MOC_2.pdf}
+\caption{Meridional overturning circulation stream function with contours every 2 Sv and an extra contour for $-1 Sv$ and $1 Sv$. Dotted contours indicate negative values. The Deacon cell appearing with the onset of the ACC is particularly visible here.}
 \label{fig:moc_total}
 \end{figure}
 
@@ -123,7 +126,20 @@ We investigate the effect of changing geometries in a simple ocean general circu
 
 
 \input{content/perioddiff}
-
+\end{multicols}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{full_sss.pdf}
+	\caption{Salinity at 245m depth for each time step.}
+	\label{fig:sss_total}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{full_sst.pdf}
+	\caption{Temperature at 245m depth for each time step.}
+	\label{fig:sst_total}
+\end{figure}
+\begin{multicols}{2}
 
 
 \input{content/summary}
@@ -154,23 +170,53 @@ This paper would not have been possible without the extensive support of Dr. Ann
 
 \end{multicols}
 \appendix
-\begin{figure}[ht]
-		\centering
-	\includegraphics[width=0.7\linewidth]{full_sss.pdf}
-	\caption{Salinity at 245m depth for each time step.}
-	\label{fig:sss_total}
+
+
+\begin{figure}[H]
+	\begin{subfigure}[b]{0.5\linewidth}
+		\caption{}
+		\label{fig:5535cooling}
+		\includegraphics[width=\linewidth]{Paleo_eocene_55_35.png}
+		
+		
+	\end{subfigure}
+	\begin{subfigure}[b]{0.5\linewidth}
+		\caption{}
+		\label{fig:salt5535cooling}
+		\includegraphics[width=\linewidth]{salt_55_35.png}
+		
+		
+	\end{subfigure}
+	\caption{ Comparison between late Paleocene (55Ma) and late Eocene (35Ma) for: \textbf{a)} Temperature ($^{\circ}C$) differences (positive values indicate warming) and  \textbf{b)} Salinity ($psu$) differences (positive values indicate higher salinity)}
 \end{figure}
-\begin{figure}[ht]
-	\centering
-	\includegraphics[width=0.7\linewidth]{full_sst.pdf}
-	\caption{Temperature at 245m depth for each time step.}
-	\label{fig:sst_total}
+\begin{figure}[H]
+	\begin{subfigure}[b]{0.5\linewidth}
+		\caption{}
+		\label{fig:3520cooling}
+		\includegraphics[width=\linewidth]{Paleo_eocene_35_20.png}
+		
+	\end{subfigure}
+	\begin{subfigure}[b]{0.5\linewidth}
+		\caption{}
+		\label{fig:salt3520cooling}
+		\includegraphics[width=\linewidth]{salt_35_20.png}
+		
+	\end{subfigure}
+	\caption{ Comparison between late Eocene (35Ma) and early Miocene (20Ma) for: \textbf{a)} Temperature ($^{\circ}C$) differences (positive values indicate warming) and  \textbf{b)} Salinity ($psu$) differences (positive values indicate higher salinity)}
 \end{figure}
-\begin{figure}[ht]
-	\centering
-	\includegraphics[width=0.7\linewidth]{full_sst_depth.pdf}
-	\caption{Latitude depth profile of the zonal mean Temperature}
-	\label{fig:sst_zmean_total}
+
+\begin{figure}[H]
+	\begin{subfigure}[b]{0.5\linewidth}
+		\caption{}
+		\label{fig:2010cooling}
+		\includegraphics[width=\linewidth]{Paleo_eocene_20_10.png}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.5\linewidth}
+		\caption{}
+		\label{fig:salt2010cooling}
+		\includegraphics[width=\linewidth]{salt_20_10.png}
+	\end{subfigure}
+	\caption{ Comparison between early Miocene (20Ma) and late Miocene (10Ma) for: \textbf{a)} Temperature ($^{\circ}C$) differences (positive values indicate warming) and  \textbf{b)} Salinity ($psu$) differences (positive values indicate higher salinity)}
 \end{figure}
 \begin{figure}[ht]
 	\centering
@@ -182,15 +228,20 @@ This paper would not have been possible without the extensive support of Dr. Ann
 	\centering
 	\includegraphics[width=0.7\linewidth]{full_atlantic_sst.pdf}
 	\caption{Latitude depth profile of the Temperature in the Atlantic ($178^{\circ} W$)}
-	\label{fig:atlsst_total}
+	\label{fig:sst_total_D}
 \end{figure}
 \begin{figure}[ht]
 	\centering
 	\includegraphics[width=0.7\linewidth]{full_sss_depth.pdf}
 	\caption{Latitude depth profile of the zonal mean Salinity}
+	\label{fig:atlsst_total_d}
+\end{figure}
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=0.7\linewidth]{full_sst_depth.pdf}
+	\caption{Latitude depth profile of the zonal mean temperature}
 	\label{fig:atlsst_total}
 \end{figure}
-
 
 
 \end{document}

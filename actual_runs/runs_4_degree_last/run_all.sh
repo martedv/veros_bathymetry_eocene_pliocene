@@ -60,7 +60,7 @@ if [ -n "$1" ]; then
         		   echo "Running ${y}Ma year: ${i}"
         		   SECONDS=0 
 			   veros resubmit -i run_${y}ma -n $i -l 31104000 \
-			    -c "mpirun -n 4 python3 4deg_basic_${y}.py -n 2 2"
+			    -c "mpirun -n 4 python3 4deg_basic_${y}.py -n 2 2" &> /dev/null
           		   duration=$SECONDS
           		   torun=$((torun-1))
 			   echo "$(($duration / 60)):$(($duration % 60))"
