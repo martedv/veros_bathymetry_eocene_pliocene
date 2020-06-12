@@ -11,7 +11,7 @@ The domain of the model is bounded by longitudes $\phi_E=-180^{\circ}$ and $\phi
  \end{figure}
 
 \subsubsection{Surface Forcings}\label{sec:forcing_ideal}
-The Veros setup used here has restoring boundary conditions. These restore the boundary at the surface of the oceanic basin to a forcing field for Sea Surface Temperature (SST), Sea Surface Salinity (SSS), wind stress ($\tau$) and heat flux.
+The Veros setup used in this paper has restoring boundary conditions. These restore the boundary at the surface of the oceanic basin to a forcing field for Sea Surface Temperature (SST), Sea Surface Salinity (SSS), wind stress ($\tau$) and heat flux.
 Choosing the correct forcing for the ocean is important. It is known that in general circulation models the MOC is sensitive to small changes in surface forcings (\cite{Milliff1999May}). Attempts at making these forcings highly idealized have often been made in the past with varying rates of success(\cite{bryan1987parameter}; \cite{Mulder2017Jul}). We note the fact that using idealized forcings will induce errors, especially in the shape of the thermohaline circulations. The use of idealized forcings is however justified here, because we are only interested in large scale features of the meridional overturning and wind-driven circulations.
 
 Several methods were explored when making these idealized forcings. In the \cite{Mulder2017Jul} paper an analytic forcing profile was used for wind stress, SST, and SSS (\cref{fig:idealized_forc}). However, Veros is a seasonally forced model, using simplified forcings would thus fail to capture seasonal changes in the SST. There have been studies suggesting that these seasonal forcings can have large effects on the strength of the meridional overturning circulation (\cite{schmittner2001seasonally}). Here we propose to take the SSS and SST profiles as zonal means of realistic forcings. We use $1^{\circ} \times 1^{\circ}$ forcings from the European Centre for Medium-Range Weather Forecasts (ECMWF) public dataset as a basis (\cite{ECMWFForc}). While the zonal wind stress is set to the simple profile proposed by \cite{bryan1987parameter}. The choice of this analytic profile was made over a zonally averaged forcing mirrored along the equator ($\mu(\tau_x)$). These forcings proved to be problematic in the polar regions (\cref{fig:tau_profile}). Both forcings were initially tested on the present-day configuration to see which most accurately captures the present-day MOC. After some initial tests, we found that $\mu(\tau_x)$ is very weak in the sub polar regions and subsequently fails to force the North Atlantic Deep Water formations (NADW).
@@ -48,23 +48,22 @@ Several methods were explored when making these idealized forcings. In the \cite
  \subsubsection{Forcing bias} \label{sec:forc_err}
 The forcings used in this paper have large errors compared to the present day realistic forcings. This can be seen if we compare them to their original realistic forcings. In \cref{fig:sss_sst_errors} the errors compared to present-day forcings are shown. There is a large discrepancy in the Atlantic, which has a much higher salinity in the realistic forcings than in the idealized forcings. This may have implications on the thermohaline circulation we will observe in our model. It is furthermore noted that the northern Atlantic ocean is much warmer in reality than in our model, which again possibly can affect the thermohaline circulation.
 Furthermore, it is also noted that the temperature on earth was also much higher in the early part of the 65Ma period (\cite{Hansen2013Oct}). We neglect this effect because we use the same forcing for each time step. Therefore, it is not possible to compare our results directly with existing proxies. However, studying the effect of geometry changes specifically is much clearer using this method and allows a deeper insight in changes induced by the geometry.
+ \subsubsection{Initial conditions}
+The model is started with an initial temperature and salinity profile. The profile is scaled from forcings taken from observational data (\cite{ECMWFForc}). The profiles again use zonal means. This results in the profile seen for the situation around the equator in \cref{fig:salt_temp_prf}.
 
+\begin{figure}[H]
+	\includegraphics[width=1\linewidth]{salt_temp_prof.png}
+	\caption{Temperature and salinity profiles at $2^{\circ} N$. Black squares indicate the Temperature ($^{\circ}C$) profile and red circles indicate the salinity($psu$) profile. Profiles from \cite{ECMWFForc} scaled to 15 depth layers with grid stretching.}
+	\label{fig:salt_temp_prf}
+\end{figure}
 \end{multicols}
 \begin{figure}[H]
 	\includegraphics[width=\linewidth]{SST_SSS_errors.png}
 	\caption{Errors in surface forcing. As a difference between ECMWF-$1^{\circ}$ forcings and their zonal mean.  Here positive values are over estimations of the forcings. Errors for: \textbf{a)} the SSS difference with contours every 1 psu and \textbf{b)} the SST difference with contours every 1 $^{\circ}C$}
 	\label{fig:sss_sst_errors}
 \end{figure}
+\newpage
 \begin{multicols}{2}
- \subsubsection{Initial conditions}
-The model is started with an initial temperature and salinity profile. The profile is scaled from forcings taken from observational data (\cite{ECMWFForc}). The profiles are again use zonal means. This results in the profile seen for the situation around the equator in \cref{fig:salt_temp_prf}.
-
-\begin{figure}[H]
-	\includegraphics[width=\linewidth]{salt_temp_prof.png}
-	\caption{Temperature and salinity profiles at $2^{\circ} N$. Black squares indicate the Temperature ($^{\circ}C$) profile and red circles indicate the salinity($psu$) profile. Profiles from \cite{ECMWFForc} scaled to 15 depth layers with grid stretching.}
-	\label{fig:salt_temp_prf}
-\end{figure}
- \newpage
 \subsubsection{MOC stream function} \label{sec:MOCSTREAM}
 The global Meridional Overturning Circulation $\Psi_{MOC}$ is defined as the zonally integrated meridional volume transport of water in the worlds oceans. It can be written down as:
 \begin{align}
@@ -105,9 +104,9 @@ For passages between larger oceanic basins it is interesting to look at the tota
 \begin{align}
 Q = \iint_A u(x,y,z) dA. \label{eq:tranpss}
 \end{align}	
-Here we integrate the zonal velocity over an area $A$ in the latitude-vertical direction that is normal to this velocity. By applying \cref{eq:psiv} to \cref{eq:tranpss} we can thus use the output of the BSF $\Psi_b$ to find the zonal volumetric flux through each grid cell in our model. We use the BSF output over the velocity output because the BSF is more accurate than the velocity field. This is because the velocity field is a derived quantity in veros. While the BSF is calculated every integration step.
+Here, we integrate the zonal velocity over an area $A$ in the latitude-vertical direction that is normal to this velocity. By applying \cref{eq:psiv} to \cref{eq:tranpss} we can use the output of the BSF $\Psi_b$ to find the zonal volumetric flux through each grid cell in our model. We use the BSF output over the velocity output because the BSF is more accurate than the velocity field. This is because the velocity field is a derived quantity in Veros, while the BSF is calculated every integration step.
 
-For each passage a suitable location is chosen such that there are no boundaries next to the passageways, this is done for each time step. In \cref{fig:passages_def} an example of this method is shown for 20Ma. This method is the same for each of the passages and thus we can study the effect of changes in bathymetry to on the relative strength of the flow. However, it should be noted that these values may not represent real physical values. As the passages in a $4^{\circ}$ model are often only a few grid cells wide. Resulting in discrepancies in the calculation of the throughflow due to boundary conditions. In \cref{fig:passages_ocean} An overview is shown of all the passages discussed in this paper.
+For each passage a suitable location is chosen such that there are no boundaries next to the passageways, this is done for each time step. In \cref{fig:passages_def} an example of this method is shown for 20Ma. This method is the same for each of the passages and thus we can study the effect of changes in bathymetry on the relative strength of the flow. However, it should be noted that these values may not represent real physical values. In \cref{fig:passages_ocean} An overview is shown of all the passages discussed in this paper.
 
 
 \begin{figure}[H]

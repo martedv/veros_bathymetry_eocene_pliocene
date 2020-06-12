@@ -29,31 +29,67 @@ sorting=none
 \graphicspath{{../plotting/figures/}}
 
 %opening
-\title{The Effect of Bathymetry Changes on Meridional Overturning Currents}
-\author{Marte Voorneveld\\
-		5911591}
-
+\title{The Effect of Bathymetry Changes on Major Oceanic Currents and Overturning Circulations}
+\date{June 2020}
+\author{Marte Voorneveld, Physics and Astronomy
+	\and \\ \textit{Supervisor:} Dr. Anna von der Heydt, Institute for Marine and Atmospheric research Utrecht}
 
 \pagestyle{fancy}
 \fancyhead{}
 \fancyfoot{}
-\fancyhead[C]{\textit{The Effect of Bathymetry Changes on Meridional Overturning Currents}}
+\fancyhead[C]{\textit{The Effect of Bathymetry Changes on Major Oceanic Currents and Overturning Circulations}}
 \fancyhead[L]{\thepage}
 \renewcommand{\headrulewidth}{0pt}
 
 \begin{document}
-
+	
+%\begin{titlepage}
+%	\begin{center}
+%		\vspace*{1cm}
+%		
+%		\maketitle
+%	\end{center}	
+%	\vspace{0.5cm}
+%	
+%	
+%	\vspace{1.5cm}
+%	Bachelor Thesis
+%	\textbf{Marte Voorneveld}\\
+%	Physics and Astronomy
+%	
+%	\vfill
+%	
+%	
+%	
+%	
+%	\begin{flushright}
+%		\textit{Supervisor:}
+%		\vspace{0.1cm}
+%		Dr. Anna von der Heydt\\
+%		Institute for Marine and Atmospheric research Utrecht
+%		
+%	\end{flushright}
+%\end{titlepage}
 \maketitle
+\begin{center}
+	\includegraphics[width=0.3\linewidth]{uu}
+\end{center}
+
 \noindent\rule{\textwidth}{1pt}
 \begin{abstract}
-We investigate the effect of changing geometries in a simple ocean general circulation model. Using highly idealized forcings we compare the the situations for every 5 Milion year (Ma) time step from 65Ma to the present day situation. The present day simulation was used as a control. The model result shows a reversal of the flow through the panama gateway in the early Miocene coinciding with the closure of the Thetys seaway. We also observe a system that is extemely senstive to the position of the Indian Continent in the Paleocene. Furthermore we observe large differences in the thermohaline circulations in comparison to the present day situation.
+We investigate the effect of changing geometries in a simple ocean general circulation model. Using highly idealized forcings we compare the situations for every 5 Milion year (Ma) time step from 65Ma to the present day situation. The present day simulation was used as a control. The model result shows a reversal of the flow through the panama gateway in the early Miocene coinciding with the closure of the Thetys seaway. We also observe a system that is extemely senstive to the position of the Indian Continent in the Paleocene. Furthermore, we observe large differences in the thermohaline circulations in comparison to the present day situation. Also, significant temperature fluctuations are observed in the Eocene-Oligocene boundary.
 \end{abstract}
 \noindent\rule{\textwidth}{1pt}
+\renewcommand{\abstractname}{Over deze scriptie}
+\begin{abstract}
+In deze scriptie wordt gekeken naar het effect van de veranderingen van de plaats van continenten op de oceaan. Hiervoor wordt een modern oceaan model gebruikt. In het oceaan model wordt elke 5 miljoen jaar in de laatste 65 miljoen jaar gesimuleerd. Het resultaat van deze modellen wordt gebruikt om te zien wat de effecten van de grote veranderingen van de locatie van de continenten is op de oceaan. Oceaanstromingen spelen een vitale rol in het moderne klimaat en het is dus belangrijk om te weten hoe deze zich in het verleden hebben ontwikkelt. Het resultaat van deze simulaties suggereert dat er voor de splitsing van zuid amerika van antarctica, zo’n 30 miljoen jaar geleden, een totaal andere globale stroming heeft bestaan. Verder wordt er bevonden dat de oceaan gevoelig lijkt voor de plaats van India in de Indische oceaan. Ook zien we dat de stroomrichting van water tussen Noord en Zuid Amerika  15 miljoen jaar geleden is omgedraaid door het sluiten van de vaarweg tussen de Mediterraanse zee en de Indische Oceaan. Er missen in het uiteindelijke model echter wel nog een aantal stromingen die in het echt wel worden geobserveerd. Een verbetering in deze stromingen zou kunnen worden verkregen met snellere computers die fijnere rasters kunnen simuleren. 
+\end{abstract}
+\newpage
 \begin{multicols}{2}
 
 \section{Introduction}
 \input{content/introduction}
-
+\newpage
 \section{Methods}
 
 %TODO (ON THE THERMOHALINE CIRCULATION)
@@ -147,7 +183,9 @@ We investigate the effect of changing geometries in a simple ocean general circu
 \input{content/discussion}
 \section{Acknowledgments}
 This paper would not have been possible without the extensive support of Dr. Anna von der Heydt, who provided valuable input on every single one of the many hurdles that had to be succumbed. I would also like to thank Dr. Michiel Baatsen for providing the bathymetry datasets used in this paper, Prof. Dr. Markus Jochum for providing valuable insight into Veros and Laurits Andreasen for helping with many of our questions and attending our virtual meetings.
+\section{Model data}
 
+For the model setups and data the reader is reffered to the GitHub page for my thesis
 
 %\section{Test images}
 %\begin{figure}[H]

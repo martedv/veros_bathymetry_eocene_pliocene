@@ -1,2 +1,2 @@
 # BONZ Marte Voorneveld
-Bachelor Thesis Marte Voorneveld. On the changes in the atlantic meridonal overturning currents. Due to changes in bathymetry over time.
+Bachelor Thesis Marte Voorneveld (Physics) on The Effect of Bathymetry Changes on Major Oceanic Currents and Overturning Circulations
