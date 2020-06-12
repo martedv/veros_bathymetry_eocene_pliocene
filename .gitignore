@@ -5,6 +5,15 @@ actual_runs/**/*.nc
 actual_runs/**/*.h5
 actual_runs/**/*.zip
 actual_runs/*.zip
+veros_setup/**/*.current_run
+veros_setup/**/*.nc
+veros_setup/**/*.h5
+veros_setup/**/*.zip
+veros_setup/*.zip
+veros_setup/runs_4_degree
+veros_setup/runs_4_degree_final
+veros_setup/runs_4_degree_final_forcing
+veros_setup/runs_4_degree_with_customdeep
 plotting/*.png
 plotting/*.jpg
 plotting/*.pdf
