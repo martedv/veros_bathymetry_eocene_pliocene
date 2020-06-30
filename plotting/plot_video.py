@@ -24,14 +24,14 @@ fig = plt.figure()
 ax = plt.axes(projection=ccrs.PlateCarree())
 ax.background_patch.set_facecolor('black')
 
-cf = ax.pcolormesh(xt,yt,Z[13], transform=ccrs.PlateCarree(), cmap='ocean')
+cf = ax.pcolormesh(xt,yt,Z[13], transform=ccrs.PlateCarree(), cmap='ocean', vmin=-5000, vmax=0)
 fig.colorbar(cf,format='%im', fraction=0.025, pad=0.04)
 def animate(i):
     n= 13-i
     ax.clear()
     cf = ax.pcolormesh(
         xt,yt,Z[i], transform=ccrs.PlateCarree(), cmap='ocean')
-    ax.set_title('%s Ma years ago' % time[n])
+    ax.set_title('Original Bathmetry: %s Ma years ago' % time[n])
     ax.background_patch.set_facecolor('black')
     
 anim = animation.FuncAnimation(fig, animate, frames=14, interval=800, blit=False)
